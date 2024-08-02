@@ -10,7 +10,7 @@ $local_storage = true; // Disk
 //$local_storage = false; // upload directly to B2
 
 $use_db = true;
-$use_db = false;
+//$use_db = false;
 
 //----------------------------------------------------------------------------------------
 // Get authorised to upload files to B2

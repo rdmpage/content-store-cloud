@@ -3,3 +3,5 @@
 env.php
 /tmp/
 !/tmp/README.md
+content.db-shm
+content.db-wal
