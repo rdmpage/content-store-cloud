@@ -13,12 +13,65 @@
 		<string>C7E5021B-D03B-4A48-B982-0D90BAB9A619</string>
 		<string>BFDCF72F-A959-49B4-BF4C-13FFD681ADE7</string>
 		<string>CBBA6C8E-539D-4124-8A44-A3EEF16A8DFD</string>
-		<string>8A359040-2C19-4C48-B107-65885CBF7E22</string>
+		<string>2B767953-75FF-43DD-9C5D-D10DFFF31E96</string>
+		<string>06F2A77B-3B2D-40B7-9997-B00DD2874C99</string>
+		<string>D215AC4E-EC99-4AE7-A063-27696D80D962</string>
 		<string>769E4DDC-3DA9-45A5-8BB9-CD9463CB9244</string>
 		<string>22F07DD7-B62C-4FEE-9FF2-C8630ADD7132</string>
 	</array>
 	<key>ProjectItems</key>
 	<dict>
+		<key>06F2A77B-3B2D-40B7-9997-B00DD2874C99</key>
+		<dict>
+			<key>ItemData</key>
+			<dict>
+				<key>BookmarkData</key>
+				<data>
+				Ym9vazwDAAAAAAQQMAAAABxiQETT74+y6h36JgCSD4Ls
+				ifnyAJGc6bSOethbtNz+LAIAAAQAAAADAwAAAAgAKAUA
+				AAABAQAAVXNlcnMAAAAFAAAAAQEAAHJwYWdlAAAACwAA
+				AAEBAABEZXZlbG9wbWVudAATAAAAAQEAAGNvbnRlbnQt
+				c3RvcmUtY2xvdWQAHAAAAAEBAAB1cGxvYWRfaW5kaXJl
+				Y3RfZnJvbV91cmwucGhwFAAAAAEGAAAQAAAAIAAAADAA
+				AABEAAAAYAAAAAgAAAAEAwAAhFwAAAAAAAAIAAAABAMA
+				AJbGAwAAAAAACAAAAAQDAABZKSUAAAAAAAgAAAAEAwAA
+				1HQwDAAAAAAIAAAABAMAAE5FNwwAAAAAFAAAAAEGAACg
+				AAAAsAAAAMAAAADQAAAA4AAAAAgAAAAABAAAQcYulpfm
+				Cp0YAAAAAQIAAAEAAAAAAAAADwAAAAAAAAAAAAAAAAAA
+				AAgAAAAEAwAAAwAAAAAAAAAEAAAAAwMAAPUBAAAIAAAA
+				AQkAAGZpbGU6Ly8vDAAAAAEBAABNYWNpbnRvc2ggSEQI
+				AAAABAMAAACQgpbnAAAACAAAAAAEAABBxdNbHoAAACQA
+				AAABAQAARUVEQkM0OTUtREY1Mi00NTZBLUI0MzEtRkI2
+				MDdCRjA0QUQxGAAAAAECAACBAAAAAQAAAO8TAAABAAAA
+				AAAAAAAAAAABAAAAAQEAAC8AAAAAAAAAAQUAABoAAAAB
+				AQAATlNVUkxEb2N1bWVudElkZW50aWZpZXJLZXkAAAQA
+				AAADAwAAlAUGANgAAAD+////AQAAAAAAAAARAAAABBAA
+				AIQAAAAAAAAABRAAAPAAAAAAAAAAEBAAABwBAAAAAAAA
+				QBAAAAwBAAAAAAAAAiAAAOgBAAAAAAAABSAAAFgBAAAA
+				AAAAECAAAGgBAAAAAAAAESAAAJwBAAAAAAAAEiAAAHwB
+				AAAAAAAAEyAAAIwBAAAAAAAAICAAAMgBAAAAAAAAMCAA
+				APQBAAAAAAAAAcAAADwBAAAAAAAAEcAAACAAAAAAAAAA
+				EsAAAEwBAAAAAAAAENAAAAQAAAAAAAAA/AEAgCACAAAA
+				AAAA
+				</data>
+				<key>FileURL</key>
+				<string>file:///Users/rpage/Development/content-store-cloud/upload_indirect_from_url.php</string>
+				<key>HasSecurityScope</key>
+				<true/>
+				<key>RelativePath</key>
+				<string>./upload_indirect_from_url.php</string>
+				<key>TypeID</key>
+				<string>_CFileLocator</string>
+				<key>Version</key>
+				<integer>1</integer>
+			</dict>
+			<key>ItemName</key>
+			<string>upload_indirect_from_url.php</string>
+			<key>ItemType</key>
+			<string>FileReference</string>
+			<key>UserOverrideItemName</key>
+			<true/>
+		</dict>
 		<key>22F07DD7-B62C-4FEE-9FF2-C8630ADD7132</key>
 		<dict>
 			<key>ItemData</key>
@@ -64,6 +117,56 @@
 			<string>utils.php</string>
 			<key>ItemType</key>
 			<string>FileReference</string>
+		</dict>
+		<key>2B767953-75FF-43DD-9C5D-D10DFFF31E96</key>
+		<dict>
+			<key>ItemData</key>
+			<dict>
+				<key>BookmarkData</key>
+				<data>
+				Ym9vazQDAAAAAAQQMAAAAM1I+DJFZlNp7bjxYjj27blN
+				fQjuZyN6TrGZYm5anxVfJAIAAAQAAAADAwAAAAgAKAUA
+				AAABAQAAVXNlcnMAAAAFAAAAAQEAAHJwYWdlAAAACwAA
+				AAEBAABEZXZlbG9wbWVudAATAAAAAQEAAGNvbnRlbnQt
+				c3RvcmUtY2xvdWQAEwAAAAEBAAB1cGxvYWRfZnJvbV91
+				cmwucGhwABQAAAABBgAAEAAAACAAAAAwAAAARAAAAGAA
+				AAAIAAAABAMAAIRcAAAAAAAACAAAAAQDAACWxgMAAAAA
+				AAgAAAAEAwAAWSklAAAAAAAIAAAABAMAANR0MAwAAAAA
+				CAAAAAQDAAAHiDAMAAAAABQAAAABBgAAmAAAAKgAAAC4
+				AAAAyAAAANgAAAAIAAAAAAQAAEHGLpaX5gqdGAAAAAEC
+				AAABAAAAAAAAAA8AAAAAAAAAAAAAAAAAAAAIAAAABAMA
+				AAMAAAAAAAAABAAAAAMDAAD1AQAACAAAAAEJAABmaWxl
+				Oi8vLwwAAAABAQAATWFjaW50b3NoIEhECAAAAAQDAAAA
+				kIKW5wAAAAgAAAAABAAAQcXTWx6AAAAkAAAAAQEAAEVF
+				REJDNDk1LURGNTItNDU2QS1CNDMxLUZCNjA3QkYwNEFE
+				MRgAAAABAgAAgQAAAAEAAADvEwAAAQAAAAAAAAAAAAAA
+				AQAAAAEBAAAvAAAAAAAAAAEFAAAaAAAAAQEAAE5TVVJM
+				RG9jdW1lbnRJZGVudGlmaWVyS2V5AAAEAAAAAwMAAMDp
+				BQDYAAAA/v///wEAAAAAAAAAEQAAAAQQAAB8AAAAAAAA
+				AAUQAADoAAAAAAAAABAQAAAUAQAAAAAAAEAQAAAEAQAA
+				AAAAAAIgAADgAQAAAAAAAAUgAABQAQAAAAAAABAgAABg
+				AQAAAAAAABEgAACUAQAAAAAAABIgAAB0AQAAAAAAABMg
+				AACEAQAAAAAAACAgAADAAQAAAAAAADAgAADsAQAAAAAA
+				AAHAAAA0AQAAAAAAABHAAAAgAAAAAAAAABLAAABEAQAA
+				AAAAABDQAAAEAAAAAAAAAPQBAIAYAgAAAAAAAA==
+				</data>
+				<key>FileURL</key>
+				<string>file:///Users/rpage/Development/content-store-cloud/upload_from_url.php</string>
+				<key>HasSecurityScope</key>
+				<true/>
+				<key>RelativePath</key>
+				<string>./upload_from_url.php</string>
+				<key>TypeID</key>
+				<string>_CFileLocator</string>
+				<key>Version</key>
+				<integer>1</integer>
+			</dict>
+			<key>ItemName</key>
+			<string>upload_from_url.php</string>
+			<key>ItemType</key>
+			<string>FileReference</string>
+			<key>UserOverrideItemName</key>
+			<true/>
 		</dict>
 		<key>49DCBEA9-1550-4B2D-B6C1-B96BB2D905AE</key>
 		<dict>
@@ -248,56 +351,6 @@
 			<string>url.php</string>
 			<key>ItemType</key>
 			<string>FileReference</string>
-		</dict>
-		<key>8A359040-2C19-4C48-B107-65885CBF7E22</key>
-		<dict>
-			<key>ItemData</key>
-			<dict>
-				<key>BookmarkData</key>
-				<data>
-				Ym9vazQDAAAAAAQQMAAAAM1I+DJFZlNp7bjxYjj27blN
-				fQjuZyN6TrGZYm5anxVfJAIAAAQAAAADAwAAAAgAKAUA
-				AAABAQAAVXNlcnMAAAAFAAAAAQEAAHJwYWdlAAAACwAA
-				AAEBAABEZXZlbG9wbWVudAATAAAAAQEAAGNvbnRlbnQt
-				c3RvcmUtY2xvdWQAEwAAAAEBAAB1cGxvYWRfZnJvbV91
-				cmwucGhwABQAAAABBgAAEAAAACAAAAAwAAAARAAAAGAA
-				AAAIAAAABAMAAIRcAAAAAAAACAAAAAQDAACWxgMAAAAA
-				AAgAAAAEAwAAWSklAAAAAAAIAAAABAMAANR0MAwAAAAA
-				CAAAAAQDAAAHiDAMAAAAABQAAAABBgAAmAAAAKgAAAC4
-				AAAAyAAAANgAAAAIAAAAAAQAAEHGLpaX5gqdGAAAAAEC
-				AAABAAAAAAAAAA8AAAAAAAAAAAAAAAAAAAAIAAAABAMA
-				AAMAAAAAAAAABAAAAAMDAAD1AQAACAAAAAEJAABmaWxl
-				Oi8vLwwAAAABAQAATWFjaW50b3NoIEhECAAAAAQDAAAA
-				kIKW5wAAAAgAAAAABAAAQcXTWx6AAAAkAAAAAQEAAEVF
-				REJDNDk1LURGNTItNDU2QS1CNDMxLUZCNjA3QkYwNEFE
-				MRgAAAABAgAAgQAAAAEAAADvEwAAAQAAAAAAAAAAAAAA
-				AQAAAAEBAAAvAAAAAAAAAAEFAAAaAAAAAQEAAE5TVVJM
-				RG9jdW1lbnRJZGVudGlmaWVyS2V5AAAEAAAAAwMAAMDp
-				BQDYAAAA/v///wEAAAAAAAAAEQAAAAQQAAB8AAAAAAAA
-				AAUQAADoAAAAAAAAABAQAAAUAQAAAAAAAEAQAAAEAQAA
-				AAAAAAIgAADgAQAAAAAAAAUgAABQAQAAAAAAABAgAABg
-				AQAAAAAAABEgAACUAQAAAAAAABIgAAB0AQAAAAAAABMg
-				AACEAQAAAAAAACAgAADAAQAAAAAAADAgAADsAQAAAAAA
-				AAHAAAA0AQAAAAAAABHAAAAgAAAAAAAAABLAAABEAQAA
-				AAAAABDQAAAEAAAAAAAAAPQBAIAYAgAAAAAAAA==
-				</data>
-				<key>FileURL</key>
-				<string>file:///Users/rpage/Development/content-store-cloud/upload_from_url.php</string>
-				<key>HasSecurityScope</key>
-				<true/>
-				<key>RelativePath</key>
-				<string>./upload_from_url.php</string>
-				<key>TypeID</key>
-				<string>_CFileLocator</string>
-				<key>Version</key>
-				<integer>1</integer>
-			</dict>
-			<key>ItemName</key>
-			<string>upload_from_url.php</string>
-			<key>ItemType</key>
-			<string>FileReference</string>
-			<key>UserOverrideItemName</key>
-			<true/>
 		</dict>
 		<key>9810E134-1884-4C7A-A863-D47387B64EE2</key>
 		<dict>
@@ -578,6 +631,57 @@
 			<string>upload.php</string>
 			<key>ItemType</key>
 			<string>FileReference</string>
+		</dict>
+		<key>D215AC4E-EC99-4AE7-A063-27696D80D962</key>
+		<dict>
+			<key>ItemData</key>
+			<dict>
+				<key>BookmarkData</key>
+				<data>
+				Ym9vazwDAAAAAAQQMAAAABdMrM7a/aMeO3sPO5Q56Kwl
+				xM7E3w2KQV3qaKuBGWMELAIAAAQAAAADAwAAAAgAKAUA
+				AAABAQAAVXNlcnMAAAAFAAAAAQEAAHJwYWdlAAAACwAA
+				AAEBAABEZXZlbG9wbWVudAATAAAAAQEAAGNvbnRlbnQt
+				c3RvcmUtY2xvdWQAGQAAAAEBAAB1cGxvYWRfbXVsdGlw
+				bGVfZmlsZXMucGhwAAAAFAAAAAEGAAAQAAAAIAAAADAA
+				AABEAAAAYAAAAAgAAAAEAwAAhFwAAAAAAAAIAAAABAMA
+				AJbGAwAAAAAACAAAAAQDAABZKSUAAAAAAAgAAAAEAwAA
+				1HQwDAAAAAAIAAAABAMAAKaANQwAAAAAFAAAAAEGAACg
+				AAAAsAAAAMAAAADQAAAA4AAAAAgAAAAABAAAQcYwhY/h
+				WQsYAAAAAQIAAAEAAAAAAAAADwAAAAAAAAAAAAAAAAAA
+				AAgAAAAEAwAAAwAAAAAAAAAEAAAAAwMAAPUBAAAIAAAA
+				AQkAAGZpbGU6Ly8vDAAAAAEBAABNYWNpbnRvc2ggSEQI
+				AAAABAMAAACQgpbnAAAACAAAAAAEAABBxdNbHoAAACQA
+				AAABAQAARUVEQkM0OTUtREY1Mi00NTZBLUI0MzEtRkI2
+				MDdCRjA0QUQxGAAAAAECAACBAAAAAQAAAO8TAAABAAAA
+				AAAAAAAAAAABAAAAAQEAAC8AAAAAAAAAAQUAABoAAAAB
+				AQAATlNVUkxEb2N1bWVudElkZW50aWZpZXJLZXkAAAQA
+				AAADAwAAAO4FANgAAAD+////AQAAAAAAAAARAAAABBAA
+				AIQAAAAAAAAABRAAAPAAAAAAAAAAEBAAABwBAAAAAAAA
+				QBAAAAwBAAAAAAAAAiAAAOgBAAAAAAAABSAAAFgBAAAA
+				AAAAECAAAGgBAAAAAAAAESAAAJwBAAAAAAAAEiAAAHwB
+				AAAAAAAAEyAAAIwBAAAAAAAAICAAAMgBAAAAAAAAMCAA
+				APQBAAAAAAAAAcAAADwBAAAAAAAAEcAAACAAAAAAAAAA
+				EsAAAEwBAAAAAAAAENAAAAQAAAAAAAAA/AEAgCACAAAA
+				AAAA
+				</data>
+				<key>FileURL</key>
+				<string>file:///Users/rpage/Development/content-store-cloud/upload_multiple_files.php</string>
+				<key>HasSecurityScope</key>
+				<true/>
+				<key>RelativePath</key>
+				<string>./upload_multiple_files.php</string>
+				<key>TypeID</key>
+				<string>_CFileLocator</string>
+				<key>Version</key>
+				<integer>1</integer>
+			</dict>
+			<key>ItemName</key>
+			<string>upload_multiple_files.php</string>
+			<key>ItemType</key>
+			<string>FileReference</string>
+			<key>UserOverrideItemName</key>
+			<true/>
 		</dict>
 	</dict>
 	<key>com.barebones.DocumentFormatVersion</key>

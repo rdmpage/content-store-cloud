@@ -76,14 +76,12 @@ function get_pdf_info(&$content_info, $pdf_filepath, $debug = false)
 		
 		//print_r($metadata); 
 	
-		if (isset($metadata['Title']))
+		if (isset($metadata['Title']) && $metadata['Title'] != '')
 		{
 			$content_info->title = $metadata['Title'];
-			
-			echo $metadata['Title'] . "\n";
 		}
 		
-		if (isset($metadata['Author']))
+		if (isset($metadata['Author']) && $metadata['Author'] != '')
 		{
 			$content_info->author = trim($metadata['Author']);
 		}								
@@ -103,7 +101,7 @@ function get_pdf_info(&$content_info, $pdf_filepath, $debug = false)
 			$content_info->producer = $metadata['Producer'];
 		}						
 				
-		// DOI may b stored in various places
+		// DOI may be stored in various places
 		if (isset($metadata['prism:doi']))
 		{
 			$content_info->doi = $metadata['prism:doi'];
@@ -373,6 +371,26 @@ function get_pdf_info(&$content_info, $pdf_filepath, $debug = false)
 		}	
 	}
 	
+	// if no title then use filename
+	if (!isset($content_info->title))
+	{
+		$content_info->title = basename($pdf_filepath);
+		$content_info->title = urldecode($content_info->title);
+	}
+	
+	// remove bad characters
+	// \u0000
+	
+	foreach ($content_info as $k => $v)
+	{
+		if (is_string($content_info->{$k}))
+		{
+			//echo "$k=" . $content_info->{$k} . "\n";
+			$content_info->{$k} = preg_replace('/\x00/', '', $content_info->{$k});
+		}
+	
+	}
+	
 }
 
 if (0)
@@ -501,6 +519,8 @@ if (0)
 	
 	$pdf_filepath = 'TZ_316_4_Gorochov.pdf';
 	//$pdf_filepath = 'Issue609.pdf';
+	
+	$pdf_filepath = "tmp/149.pdf";
 		
 	$content_info = get_content_info($pdf_filepath);
 	get_pdf_info($content_info, $pdf_filepath, true);

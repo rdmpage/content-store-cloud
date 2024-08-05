@@ -129,18 +129,29 @@ function store_content_info_db($content_info, $debug = false)
 }
 
 //----------------------------------------------------------------------------------------
-function store_source_info_db($sha1, $pdf_filename, $source_url = '', $debug = false)
+function store_source_info_db($sha1, $source_info, $debug = false)
 {
 	// source, either a URL (i.e., downloaded) or a file(i.e., already existing file)
 	$obj = new stdclass;
 	$obj->sha1 = $sha1;
-	if ($source_url != '')
+
+	if (isset($source_info->url))
 	{
-		$obj->uri = $source_url;
+		$obj->uri = $source_info->url;
 	}
 	else
 	{
-		$obj->uri = 'file://' . $pdf_filename;
+		$obj->uri = 'file://' . $source_info->pdf_filename;
+	}
+	
+	if (isset($source_info->license))
+	{
+		$obj->license = $source_info->license;
+	}
+
+	if (isset($source_info->doi))
+	{
+		$obj->doi = $source_info->doi;
 	}
 	
 	$sql = obj_to_sql($obj, 'source');
@@ -154,40 +165,35 @@ function store_source_info_db($sha1, $pdf_filename, $source_url = '', $debug = f
 }
 
 //----------------------------------------------------------------------------------------
-function store_pdf($pdf_filename, $source_url = '', $debug = true)
+function store_pdf($source_info, $debug = true)
 {
 	global $config;
 	global $use_db;
 
-	if (!file_exists($pdf_filename))
+	if (!file_exists($source_info->pdf_filename))
 	{
-		echo "$pdf_filename not found\n";
+		echo "$source_info->pdf_filename not found\n";
 		exit();
 	}
 	
 	// is if a PDF?
-	$handle = fopen($pdf_filename, "rb");
+	$handle = fopen($source_info->pdf_filename, "rb");
 	$file_start = fread($handle, 1024);  //<<--- as per your need 
 	fclose($handle);
 
 	if (!preg_match('/^\s*%PDF/', $file_start))
 	{
-		echo "$pdf_filename is not a PDF\n";
+		echo "$source_info->pdf_filename is not a PDF\n";
 		exit();
 	}	
 
-	echo "Getting info for $pdf_filename\n";
+	echo "Getting info for $source_info->pdf_filename\n";
 	
 	// get information about the PDF
-	$content_info = get_content_info($pdf_filename);
+	$content_info = get_content_info($source_info->pdf_filename);
 	
-	get_pdf_info($content_info, $pdf_filename, false);
-	
-	if ($source_url != '')
-	{
-		$content_info->source_url = $source_url;
-	}
-	
+	get_pdf_info($content_info, $source_info->pdf_filename, false);
+		
 	echo "Storing file using SHA1\n";
 	
 	// get SHA1-based file name
@@ -214,8 +220,8 @@ function store_pdf($pdf_filename, $source_url = '', $debug = true)
 	
 	if (!file_exists($store_filename))
 	{	
-		echo "Copying $pdf_filename to $store_filename\n";	
-		copy($pdf_filename, $store_filename);
+		echo "Copying $source_info->pdf_filename to $store_filename\n";	
+		copy($source_info->pdf_filename, $store_filename);
 	}
 	else
 	{
@@ -247,7 +253,7 @@ function store_pdf($pdf_filename, $source_url = '', $debug = true)
 	if ($use_db)
 	{
 		store_content_info_db($content_info);
-		store_source_info_db($content_info->sha1, $pdf_filename, $source_url);
+		store_source_info_db($content_info->sha1, $source_info);
 	}
 }	
 
