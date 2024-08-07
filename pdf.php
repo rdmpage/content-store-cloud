@@ -3,26 +3,10 @@
 // Extract core details from PDF
 
 require_once (dirname(__FILE__) . '/vendor/autoload.php');
-
+require_once (dirname(__FILE__) . '/utils.php');
 
 ini_set('memory_limit', '-1');
 
-//----------------------------------------------------------------------------------------
-// Get core content info, such as hashes (sha1 and md5), MIME type, and file size
-function get_content_info($content_filepath)
-{
-	$content_info = new stdclass;
-	
-	// B2 required
-	$content_info->sha1     = sha1_file($content_filepath);
-	$content_info->size 	= filesize($content_filepath);
-	$content_info->mimetype = mime_content_type($content_filepath);
-	
-	// MD5
-	$content_info->md5     	= md5_file($content_filepath);
-	
-	return $content_info;
-}
 
 //----------------------------------------------------------------------------------------
 // Add PDF-specific information to $content_info

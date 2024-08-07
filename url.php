@@ -86,7 +86,7 @@ if (!function_exists('http_parse_headers')) {
 
 //----------------------------------------------------------------------------------------
 // 
-function get_filename_from_url($url)
+function get_filename_from_url($url, $extension = '')
 {
 	$filename = '';
 	
@@ -100,9 +100,12 @@ function get_filename_from_url($url)
 		
 		$filename = sanitise_filename($filename);
 		
-		if (!preg_match('/\.pdf$/i', $filename))
-		{
-			$filename .= '.pdf';
+		if ($extension != '')
+		{			
+			if (!preg_match('/\.' . $extension . '$/i', $filename))
+			{
+				$filename .= '.' . $extension;
+			}
 		}
 	}
 	
@@ -150,6 +153,42 @@ function get_source_details($url, $accept = '', $head = true, $debug = false)
 	}
 	
 	return $source;
+}
+
+//----------------------------------------------------------------------------------------
+// Simple HTTP get
+function get($url)
+{	
+	$data = null;
+
+	$opts = array(
+	  CURLOPT_URL =>$url,
+	  CURLOPT_FOLLOWLOCATION => TRUE,
+	  CURLOPT_RETURNTRANSFER => TRUE,
+	  
+	  CURLOPT_HEADER 		=> FALSE,
+	  
+	  CURLOPT_SSL_VERIFYHOST=> FALSE,
+	  CURLOPT_SSL_VERIFYPEER=> FALSE,
+	  
+	  CURLOPT_COOKIEJAR=> sys_get_temp_dir() . '/cookies.txt',
+	  CURLOPT_COOKIEFILE=> sys_get_temp_dir() . '/cookies.txt',
+	  
+	);
+
+	$opts[CURLOPT_HTTPHEADER] = array(
+		"Accept: */*", 
+		"Accept-Language: en-gb",
+		"User-agent: Mozilla/5.0 (iPad; U; CPU OS 3_2_1 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Mobile/7B405" 
+	);
+	
+	$ch = curl_init();
+	curl_setopt_array($ch, $opts);
+	$data = curl_exec($ch);
+	$info = curl_getinfo($ch); 
+	curl_close($ch);
+	
+	return $data;
 }
 
 if (0)

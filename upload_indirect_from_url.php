@@ -10,40 +10,7 @@ require_once(dirname(__FILE__) . '/upload.php');
 use Sunra\PhpSimple\HtmlDomParser;
 
 
-//----------------------------------------------------------------------------------------
-function get($url)
-{	
-	$data = null;
 
-	$opts = array(
-	  CURLOPT_URL =>$url,
-	  CURLOPT_FOLLOWLOCATION => TRUE,
-	  CURLOPT_RETURNTRANSFER => TRUE,
-	  
-	  CURLOPT_HEADER 		=> FALSE,
-	  
-	  CURLOPT_SSL_VERIFYHOST=> FALSE,
-	  CURLOPT_SSL_VERIFYPEER=> FALSE,
-	  
-	  CURLOPT_COOKIEJAR=> sys_get_temp_dir() . '/cookies.txt',
-	  CURLOPT_COOKIEFILE=> sys_get_temp_dir() . '/cookies.txt',
-	  
-	);
-
-	$opts[CURLOPT_HTTPHEADER] = array(
-		"Accept: */*", 
-		"Accept-Language: en-gb",
-		"User-agent: Mozilla/5.0 (iPad; U; CPU OS 3_2_1 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Mobile/7B405" 
-	);
-	
-	$ch = curl_init();
-	curl_setopt_array($ch, $opts);
-	$data = curl_exec($ch);
-	$info = curl_getinfo($ch); 
-	curl_close($ch);
-	
-	return $data;
-}
 
 $debug = false;
 
@@ -61,7 +28,32 @@ $urls=array(
 
 //'https://doi.org/10.13189/ujar.2017.050207',
 
-'https://journals.co.za/doi/abs/10.10520/AJA10115498_193',
+//'https://journals.co.za/doi/abs/10.10520/AJA10115498_193', // fail
+//'https://dx.doi.org/10.1186/1471-2148-10-386',
+//'https://dx.doi.org/10.1371/journal.pone.0111895',
+
+//'https://doi.org/10.11369/jji1950.31.20',
+
+//'https://doi.org/10.5109/2398',
+
+//'https://www.ajol.info/index.php/az/article/view/154245',
+
+//'https://doi.org/10.26749/NGXY8257',
+
+
+//'https://doi.org/10.1371/journal.pone.0133602',
+
+//'http://hdl.handle.net/2115/63995',
+
+//'https://www.nmnhs.com/historia-naturalis-bulgarica/article.php?id=000536000462024',
+
+//'https://www1.montpellier.inra.fr/CBGP/acarologia/article.php?id=4710',
+
+//'https://rosa.uniroma1.it/rosa02/fragmenta_entomologica/article/view/1576',
+//'https://doi.org/10.48027/hnb.45.121',
+'https://dx.doi.org/10.1017/S0031182024000088', // failed to parse HTML
+
+'https://doi.org/10.15407/zoo2024.02.163',
 );
 
 
@@ -92,6 +84,9 @@ foreach ($urls as $url)
 				case 'citation_pdf_url':
 					$source->url = $meta->content;
 					$source->url = str_replace('&amp;', '&', $source->url);
+					
+					// https://www1.montpellier.inra.fr/CBGP/acarologia/article.php?id=4710
+					$source->url = str_replace('inrae.r', 'inrae.fr', $source->url);
 					break;
 					
 				case 'dc.rights':
@@ -100,13 +95,64 @@ foreach ($urls as $url)
 						$source->license = $meta->content;
 					}
 					break;
+
+				// J-STAGE
+				case 'access_control':
+					$source->license = $meta->content;
+					break;
 					
 				default:
 					break;
 			}
+			
+			// e.g. https://catalog.lib.kyushu-u.ac.jp/opac_detail_md/?lang=1&amode=MD100000&bibid=2398
+			// key info such as DOI and access rights are in table
+			switch ($meta->property)
+			{				
+				case 'citation_doi':
+					$source->doi = $meta->content;
+					break;
+					
+				case 'citation_pdf_url':
+					$source->url = $meta->content;
+					$source->url = str_replace('&amp;', '&', $source->url);
+					break;
+					
+				default:
+					break;
+			}
+			
+			
 		}
 		
-		// license?
+		// license------------------------------------------------------------------------
+		
+		// Figshare
+		foreach ($dom->find('div a') as $a)
+		{
+			if (preg_match('/rightsstatements.org/', $a->href))
+			{
+				$source->license = $a->href;
+			}
+		}
+
+		// https://www.nmnhs.com/
+		foreach ($dom->find('div a[rel=license noopener]') as $a)
+		{
+			if (preg_match('/creativecommons.org/', $a->href))
+			{
+				$source->license = $a->href;
+			}
+		}
+		
+		// PLoS
+		foreach ($dom->find('div[class=articleinfo] a') as $a)
+		{
+			if (preg_match('/creativecommons.org/', $a->href))
+			{
+				$source->license = $a->href;
+			}
+		}
 		
 		// SciElo
 		foreach ($dom->find('div[class=container-license] a') as $a)
@@ -125,8 +171,32 @@ foreach ($urls as $url)
 				$source->license = $a->href;
 			}
 		}
+		
+		// Acarologia
+		foreach ($dom->find('div a[rel=license]') as $a)
+		{
+			if (preg_match('/creativecommons.org/', $a->href))
+			{
+				$source->license = $a->href;
+			}
+		}
 
-		// PDF
+		
+		// DOI----------------------------------------------------------------------------
+
+		// https://www.nmnhs.com/
+		foreach ($dom->find('div[class=box_emph_e] a') as $a)
+		{
+			if (preg_match('/\/(10.48027.*)/', $a->href, $m))
+			{
+				if (!isset($source->doi))
+				{
+					$source->doi = $m[1];
+				}
+			}
+		}
+
+		// PDF----------------------------------------------------------------------------
 		foreach ($dom->find('li[class=article__navbar__col] a[aria-label= PDF]') as $a)
 		{
 			if (preg_match('/epdf/', $a->href))
@@ -139,10 +209,10 @@ foreach ($urls as $url)
 		
 		if ($source->url != $url)
 		{
-			$source->pdf_filename = get_filename_from_url($source->url);					
-			$source->pdf_filename = $config['tmp'] . '/' . $source->pdf_filename;
+			$source->content_filename = get_filename_from_url($source->url, 'pdf');											
+			$source->content_filename = $config['tmp'] . '/' . $source->content_filename;
 		
-			$command = "curl -L -o '$source->pdf_filename' '$source->url'";
+			$command = "curl -L -o '$source->content_filename' '$source->url'";
 			echo $command . "\n";
 			system($command);
 			
@@ -153,6 +223,10 @@ foreach ($urls as $url)
 			usleep($rand);
 		}
 		
+	}
+	else
+	{
+		echo "Could not parse HTML\n";
 	}
 	
 }

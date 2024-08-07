@@ -16,14 +16,20 @@ $base_dir = '/Users/rpage/Downloads';
 $base_url = '';
 $base_license = '';
 
+$base_dir = dirname(__FILE__) . '/watch';
+$base_url = '';
+$base_license = '';
+
 
 $files = scandir($base_dir);
 
 //$files = array('2020v20n1-11.pdf');
-
+/*
 $files=array('Ogusuku1999LutzomyiaMunaypataLQuillabambaCuscoPeru.pdf');
 $files=array('bsef_0037-928x_2004_num_109_2_16099.pdf');
 $files=array('Phl botomes de Bolivie  Description de Quatre Nouvelles Esp ces de Lutzomyia  Diptera  Psychodidae .pdf');
+$files=array('A review of the Namaqua gecko  Pachydactylus namaquensis  Reptilia  Gekkonidae  from southern Africa  with the description of two new species.pdf');
+*/
 
 foreach ($files as $filename)
 {
@@ -47,7 +53,7 @@ foreach ($files as $filename)
 		echo $url . "\n";
 		
 		$source_info = new stdclass;
-		$source_info->pdf_filename = $base_dir . '/' . $filename;
+		$source_info->content_filename = $base_dir . '/' . $filename;
 
 		if ($url != '')
 		{

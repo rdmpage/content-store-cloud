@@ -14,4 +14,19 @@ The store uses [Backblaze B2](https://www.backblaze.com/cloud-storage). To help 
 
 This is also a handy way to add content to the store. Rather than use the B2 API directly, we can simply copy a file to the mounted content store and let CloudMounter copy it to the cloud.
 
+## Interesting examples
+
+## BioNames having wrong hash
+
+For example, http://www.cassidae.uni.wroc.pl/Warchalowski_Pachybrachis%20review.pdf has a SHA1 of `31eca8c9a86aa285e4d621fbc6a9c4d5821b19e3` in BioNames, but loading into the content store we get a SHA1 of `9805065c4a3aea9c7c00c25e5fc1f1f9940366ac`. The later is also the SHA1 hash of the file downloaded from BioNames (i.e., the file stored under `31eca8c9a86aa285e4d621fbc6a9c4d5821b19e3`), suggesting there is a bug in the BioNames code.
+
+## PDF evolution
+
+The same PDF can be modified by adding cover pages, etc., and this seems to overwrite the PDF fingerprint, e.g. the following three sources of a PDF have two different hashes:
+
+- https://eprints.utas.edu.au/13231/1/1937-Hogg-DEntrecasteaux.pdf
+- https://core.ac.uk/download/pdf/33322478.pdf
+- https://figshare.utas.edu.au/ndownloader/files/43234248/1
+
+
 
