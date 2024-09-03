@@ -9,23 +9,62 @@ ini_set('memory_limit', '-1');
 
 
 //----------------------------------------------------------------------------------------
+function file_is_pdf($filename)
+{
+	$is_pdf = true;
+
+	// is if a PDF?
+	$handle = fopen($filename, "rb");
+	
+	// first 1K
+	$file_start = fread($handle, 1024);  //<<--- as per your need 
+	
+	// last 1K
+	fseek($handle, -1024, SEEK_END);
+	$file_end = fread($handle, 1024);
+	
+	fclose($handle);
+
+	if (!preg_match('/^\s*%PDF/', $file_start))
+	{
+		echo "$filename is not a PDF\n";
+		$is_pdf = false;
+	}	
+
+	// lack of xref causes PDF parser to through exception and bail
+	if (!preg_match('/xref/', $file_start) && !preg_match('/xref/', $file_end))
+	{
+		echo "$filename does not have xref\n";
+		$is_pdf = false;
+	}	
+	
+	return $is_pdf;
+}
+
+//----------------------------------------------------------------------------------------
 // Add PDF-specific information to $content_info
 function get_pdf_info(&$content_info, $pdf_filepath, $debug = false)
 {
 	$parser_config = new \Smalot\PdfParser\Config();
 	$parser_config->setRetainImageContent(false);
 	$parser_config->setIgnoreEncryption(true);
-
+	
 	$parser = new \Smalot\PdfParser\Parser([], $parser_config);
 
 	// parse PDF
 	$pdf = $parser->parseFile($pdf_filepath);
+	
+	if ($debug)
+	{
+		echo "Parsed PDF\n";
+	}
 	
 	$trailer = $pdf->getTrailer();
 	
 	// PDF fingerprint (uniquely identifies PDF, and also flags whether it has been modified)
 	if ($trailer->has('Id')) 
 	{
+
 		/** @var PDFObject $info */
 		$id = $trailer->get('Id');
 
@@ -68,7 +107,12 @@ function get_pdf_info(&$content_info, $pdf_filepath, $debug = false)
 		if (isset($metadata['Author']) && $metadata['Author'] != '')
 		{
 			$content_info->author = trim($metadata['Author']);
-		}								
+		}	
+		
+		if (isset($metadata['Subject']) && $metadata['Subject'] != '')
+		{
+			$content_info->subject = trim($metadata['Subject']);
+		}															
 		
 		if (isset($metadata['Pages']))
 		{
@@ -282,6 +326,11 @@ function get_pdf_info(&$content_info, $pdf_filepath, $debug = false)
 			{
 				$details = $annotation->getDetails();
 				
+				if ($debug)
+				{
+					print_r($details);
+				}
+				
 				if (isset($details['A']))
 				{				
 					if (!isset($content_info->links))
@@ -370,6 +419,12 @@ function get_pdf_info(&$content_info, $pdf_filepath, $debug = false)
 		if (is_string($content_info->{$k}))
 		{
 			//echo "$k=" . $content_info->{$k} . "\n";
+			
+			if (!mb_check_encoding($content_info->{$k}, 'UTF-8'))
+			{
+				$content_info->{$k} = mb_convert_encoding($content_info->{$k}, 'UTF-8', mb_detect_encoding($content_info->{$k}));
+			}	
+			
 			$content_info->{$k} = preg_replace('/\x00/', '', $content_info->{$k});
 		}
 	
@@ -379,8 +434,6 @@ function get_pdf_info(&$content_info, $pdf_filepath, $debug = false)
 
 if (0)
 {
-	
-
 	$pdf_filepath = dirname(__FILE__) . '/' . 'zootaxa.4144.3.1-21961.pdf';
 	
 	$pdf_filepath = dirname(__FILE__) . '/' . '034.018.0202.pdf';
@@ -505,6 +558,17 @@ if (0)
 	//$pdf_filepath = 'Issue609.pdf';
 	
 	$pdf_filepath = "tmp/149.pdf";
+	$pdf_filepath = "tmp/3229e3a0861dfe78e86f46404a11e47bf8a07d2c.pdf";
+	$pdf_filepath = "tmp/327d8784d76bde709f67c58b8e20325378110a5d.pdf";
+	
+	// PDF with links to articles, can we get the text associated with these links?
+	$pdf_filepath = "CJSTOC.PDF";
+	
+	if (!file_is_pdf($pdf_filepath))
+	{
+		echo "Badness\n";
+		exit();
+	}
 		
 	$content_info = get_content_info($pdf_filepath);
 	get_pdf_info($content_info, $pdf_filepath, true);

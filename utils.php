@@ -267,6 +267,14 @@ function sanitise_filename($filename)
 	[{}^\~`]                 # URL unsafe characters https://www.ietf.org/rfc/rfc1738.txt
 	~x',
 	'-', $filename);
+	
+	// encoding issues?
+	if (!mb_check_encoding($filename, 'UTF-8'))
+	{
+		$filename = mb_convert_encoding($filename, 'UTF-8', mb_detect_encoding($filename));
+	}
+	
+	$filename = preg_replace('/\x00/', '', $filename);	
 
 	return $filename;
 }

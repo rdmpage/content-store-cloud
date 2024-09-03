@@ -51,9 +51,28 @@ $urls=array(
 
 //'https://rosa.uniroma1.it/rosa02/fragmenta_entomologica/article/view/1576',
 //'https://doi.org/10.48027/hnb.45.121',
-'https://dx.doi.org/10.1017/S0031182024000088', // failed to parse HTML
+//'https://dx.doi.org/10.1017/S0031182024000088', // failed to parse HTML
 
-'https://doi.org/10.15407/zoo2024.02.163',
+//'https://doi.org/10.15407/zoo2024.02.163',
+
+//'http://hdl.handle.net/2115/9323',
+
+//'https://doi.org/10.26515/rzsi/v1/i2/1907/163366',
+
+//'https://doi.org/10.20848/kontyu.16.3_183',
+
+//'https://doi.org/10.26515/rzsi/v9/i4/1913/163661',
+
+//'https://zenodo.org/records/5643781',
+//'https://doi.org/10.5281/zenodo.6477283',
+
+//'https://hdl.handle.net/2115/9357',
+
+//'https://hdl.handle.net/2027.42/56942',
+
+//'https://www.contributions-to-entomology.org/article/view/2067',
+
+'https://doi.org/10.20643/00001606',
 );
 
 
@@ -79,6 +98,10 @@ foreach ($urls as $url)
 			{				
 				case 'citation_doi':
 					$source->doi = $meta->content;
+					break;
+	
+				case 'citation_title':
+					$source->title = $meta->content;
 					break;
 					
 				case 'citation_pdf_url':

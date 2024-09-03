@@ -13,12 +13,14 @@
 		<string>C7E5021B-D03B-4A48-B982-0D90BAB9A619</string>
 		<string>BFDCF72F-A959-49B4-BF4C-13FFD681ADE7</string>
 		<string>CBBA6C8E-539D-4124-8A44-A3EEF16A8DFD</string>
+		<string>6C5B2DBB-1950-4203-879F-F3D6881D46CE</string>
 		<string>2B767953-75FF-43DD-9C5D-D10DFFF31E96</string>
 		<string>35B200E6-BE86-46A8-AC81-D77C87C161D6</string>
 		<string>06F2A77B-3B2D-40B7-9997-B00DD2874C99</string>
 		<string>D215AC4E-EC99-4AE7-A063-27696D80D962</string>
 		<string>769E4DDC-3DA9-45A5-8BB9-CD9463CB9244</string>
 		<string>22F07DD7-B62C-4FEE-9FF2-C8630ADD7132</string>
+		<string>53A92BC9-2A5C-42F5-90F9-BD8D26AD4CFD</string>
 	</array>
 	<key>ProjectItems</key>
 	<dict>
@@ -265,6 +267,52 @@
 			<key>ItemType</key>
 			<string>FileReference</string>
 		</dict>
+		<key>53A92BC9-2A5C-42F5-90F9-BD8D26AD4CFD</key>
+		<dict>
+			<key>ItemData</key>
+			<dict>
+				<key>BookmarkData</key>
+				<data>
+				Ym9va+wCAAAAAAQQMAAAAEbNyHc3vaI0l4qtxa3oevuQ
+				XSvVgxDzCHNBqw3da+aK6AEAAAQAAAADAwAAAAgAKAUA
+				AAABAQAAVXNlcnMAAAAFAAAAAQEAAHJwYWdlAAAACwAA
+				AAEBAABEZXZlbG9wbWVudAATAAAAAQEAAGNvbnRlbnQt
+				c3RvcmUtY2xvdWQABgAAAAEBAAB2ZW5kb3IAABQAAAAB
+				BgAAEAAAACAAAAAwAAAARAAAAGAAAAAIAAAABAMAAIRc
+				AAAAAAAACAAAAAQDAACWxgMAAAAAAAgAAAAEAwAAWSkl
+				AAAAAAAIAAAABAMAANR0MAwAAAAACAAAAAQDAACAdjAM
+				AAAAABQAAAABBgAAjAAAAJwAAACsAAAAvAAAAMwAAAAI
+				AAAAAAQAAEHGLpN8n8SqGAAAAAECAAACAAAAAAAAAA8A
+				AAAAAAAAAAAAAAAAAAAIAAAABAMAAAMAAAAAAAAABAAA
+				AAMDAAD1AQAACAAAAAEJAABmaWxlOi8vLwwAAAABAQAA
+				TWFjaW50b3NoIEhECAAAAAQDAAAAkIKW5wAAAAgAAAAA
+				BAAAQcXTWx6AAAAkAAAAAQEAAEVFREJDNDk1LURGNTIt
+				NDU2QS1CNDMxLUZCNjA3QkYwNEFEMRgAAAABAgAAgQAA
+				AAEAAADvEwAAAQAAAAAAAAAAAAAAAQAAAAEBAAAvAAAA
+				AAAAAAEFAADMAAAA/v///wEAAAAAAAAAEAAAAAQQAABw
+				AAAAAAAAAAUQAADcAAAAAAAAABAQAAAIAQAAAAAAAEAQ
+				AAD4AAAAAAAAAAIgAADUAQAAAAAAAAUgAABEAQAAAAAA
+				ABAgAABUAQAAAAAAABEgAACIAQAAAAAAABIgAABoAQAA
+				AAAAABMgAAB4AQAAAAAAACAgAAC0AQAAAAAAADAgAADg
+				AQAAAAAAAAHAAAAoAQAAAAAAABHAAAAgAAAAAAAAABLA
+				AAA4AQAAAAAAABDQAAAEAAAAAAAAAA==
+				</data>
+				<key>FileURL</key>
+				<string>file:///Users/rpage/Development/content-store-cloud/vendor/</string>
+				<key>HasSecurityScope</key>
+				<true/>
+				<key>RelativePath</key>
+				<string>./vendor</string>
+				<key>TypeID</key>
+				<string>_CFileLocator</string>
+				<key>Version</key>
+				<integer>1</integer>
+			</dict>
+			<key>ItemName</key>
+			<string>vendor</string>
+			<key>ItemType</key>
+			<string>FolderReference</string>
+		</dict>
 		<key>576E11A3-63F8-4DEE-ACE2-82FC7F48ADF9</key>
 		<dict>
 			<key>ItemData</key>
@@ -357,6 +405,56 @@
 			<key>ItemType</key>
 			<string>FileReference</string>
 		</dict>
+		<key>6C5B2DBB-1950-4203-879F-F3D6881D46CE</key>
+		<dict>
+			<key>ItemData</key>
+			<dict>
+				<key>BookmarkData</key>
+				<data>
+				Ym9vazQDAAAAAAQQMAAAADQoiDnzvBXoxEVJMEBPUeDl
+				zy/xsrfNubzDQ93ccWLXJAIAAAQAAAADAwAAAAgAKAUA
+				AAABAQAAVXNlcnMAAAAFAAAAAQEAAHJwYWdlAAAACwAA
+				AAEBAABEZXZlbG9wbWVudAATAAAAAQEAAGNvbnRlbnQt
+				c3RvcmUtY2xvdWQAEgAAAAEBAAB1cGxvYWRfYXJjaGl2
+				ZS5waHAAABQAAAABBgAAEAAAACAAAAAwAAAARAAAAGAA
+				AAAIAAAABAMAAIRcAAAAAAAACAAAAAQDAACWxgMAAAAA
+				AAgAAAAEAwAAWSklAAAAAAAIAAAABAMAANR0MAwAAAAA
+				CAAAAAQDAADt8FkMAAAAABQAAAABBgAAmAAAAKgAAAC4
+				AAAAyAAAANgAAAAIAAAAAAQAAEHGNQNmqYg+GAAAAAEC
+				AAABAAAAAAAAAA8AAAAAAAAAAAAAAAAAAAAIAAAABAMA
+				AAMAAAAAAAAABAAAAAMDAAD1AQAACAAAAAEJAABmaWxl
+				Oi8vLwwAAAABAQAATWFjaW50b3NoIEhECAAAAAQDAAAA
+				kIKW5wAAAAgAAAAABAAAQcXTWx6AAAAkAAAAAQEAAEVF
+				REJDNDk1LURGNTItNDU2QS1CNDMxLUZCNjA3QkYwNEFE
+				MRgAAAABAgAAgQAAAAEAAADvEwAAAQAAAAAAAAAAAAAA
+				AQAAAAEBAAAvAAAAAAAAAAEFAAAaAAAAAQEAAE5TVVJM
+				RG9jdW1lbnRJZGVudGlmaWVyS2V5AAAEAAAAAwMAAH0j
+				BgDYAAAA/v///wEAAAAAAAAAEQAAAAQQAAB8AAAAAAAA
+				AAUQAADoAAAAAAAAABAQAAAUAQAAAAAAAEAQAAAEAQAA
+				AAAAAAIgAADgAQAAAAAAAAUgAABQAQAAAAAAABAgAABg
+				AQAAAAAAABEgAACUAQAAAAAAABIgAAB0AQAAAAAAABMg
+				AACEAQAAAAAAACAgAADAAQAAAAAAADAgAADsAQAAAAAA
+				AAHAAAA0AQAAAAAAABHAAAAgAAAAAAAAABLAAABEAQAA
+				AAAAABDQAAAEAAAAAAAAAPQBAIAYAgAAAAAAAA==
+				</data>
+				<key>FileURL</key>
+				<string>file:///Users/rpage/Development/content-store-cloud/upload_archive.php</string>
+				<key>HasSecurityScope</key>
+				<true/>
+				<key>RelativePath</key>
+				<string>./upload_archive.php</string>
+				<key>TypeID</key>
+				<string>_CFileLocator</string>
+				<key>Version</key>
+				<integer>1</integer>
+			</dict>
+			<key>ItemName</key>
+			<string>upload_archive.php</string>
+			<key>ItemType</key>
+			<string>FileReference</string>
+			<key>UserOverrideItemName</key>
+			<true/>
+		</dict>
 		<key>769E4DDC-3DA9-45A5-8BB9-CD9463CB9244</key>
 		<dict>
 			<key>ItemData</key>
@@ -402,6 +500,15 @@
 			<string>url.php</string>
 			<key>ItemType</key>
 			<string>FileReference</string>
+		</dict>
+		<key>8C29A5D8-BA81-440F-82B7-907C07C9F4A8</key>
+		<dict>
+			<key>ItemData</key>
+			<string>https://zoolstud.sinica.edu.tw/Journals/63/63-22.pdf</string>
+			<key>ItemName</key>
+			<string>63-22.pdf</string>
+			<key>ItemType</key>
+			<string>RemoteResource</string>
 		</dict>
 		<key>9810E134-1884-4C7A-A863-D47387B64EE2</key>
 		<dict>

@@ -84,7 +84,8 @@ function upload_pdf($upload, $pdf_filename, $source_url = '', $debug = true)
 function store_content_info_db($content_info, $debug = false)
 {
 	// content (will be same regardless of source)
-	$k = array('sha1', 'md5', 'sha256', 'mimetype', 'size', 'id', 'title', 'author', 'pages', 
+	$k = array('sha1', 'md5', 'sha256', 'mimetype', 'size', 'id', 'title', 'author', 'subject',
+		'pages', 
 		'creator', 'producer', 
 		'doi', 'rgid', 
 		'license', 'links',
@@ -154,6 +155,11 @@ function store_source_info_db($sha1, $source_info, $debug = false)
 		$obj->doi = $source_info->doi;
 	}
 	
+	if (isset($source_info->title))
+	{
+		$obj->title = $source_info->title;
+	}
+	
 	$sql = obj_to_sql($obj, 'source');
 	
 	if ($debug)
@@ -177,15 +183,10 @@ function store_pdf($source_info, $debug = true)
 	}
 	
 	// is if a PDF?
-	$handle = fopen($source_info->content_filename, "rb");
-	$file_start = fread($handle, 1024);  //<<--- as per your need 
-	fclose($handle);
-
-	if (!preg_match('/^\s*%PDF/', $file_start))
+	if (!file_is_pdf($source_info->content_filename))
 	{
-		echo "$source_info->content_filename is not a PDF\n";
 		return false;
-	}	
+	}
 
 	echo "Getting info for $source_info->content_filename\n";
 	
@@ -354,5 +355,24 @@ function store_image($source_info, $debug = true)
 	return true;
 }	
 
+//----------------------------------------------------------------------------------------
+// test whether source URL is already in database
+function source_url_in_db($url)
+{
+	$sql = 'SELECT uri FROM source WHERE uri="' . $url . '" LIMIT 1';
+	$data = db_get($sql);
+		
+	return (count($data) == 1);
+}
+
+//----------------------------------------------------------------------------------------
+// test whether SHA1 is already in database
+function source_sha1_in_db($sha1)
+{
+	$sql = 'SELECT sha1 FROM content WHERE sha1="' . $sha1 . '" LIMIT 1';
+	$data = db_get($sql);
+	
+	return (count($data) == 1);
+}
 
 ?>

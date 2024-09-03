@@ -28,5 +28,20 @@ The same PDF can be modified by adding cover pages, etc., and this seems to over
 - https://core.ac.uk/download/pdf/33322478.pdf
 - https://figshare.utas.edu.au/ndownloader/files/43234248/1
 
+### PDFs with different hashes but same fingerprints
 
+This might happen because PDF's have metadata updated(?)
+
+- Fingerprint `c2e3e0167f3fe4ef2fb45a718d6be323` for `007f578162ae7f6f64db66a90a18f4beebdc31fd` and `716cc665d4214367217f7045539021d0c15b0f76`
+
+## Harvesting
+
+### BioNames
+
+```
+SELECT CONCAT("'http://bionames.org/sha1/",sha1, "',") FROM sha1 WHERE pdf LIKE "http://www.nev.nl/tve/pdf%";
+```
+### Hard to scarpe websites
+
+Look at https://github.com/lwthiker/curl-impersonate and https://www.zenrows.com/blog/bypass-cloudflare
 
