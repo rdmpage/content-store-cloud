@@ -34,6 +34,12 @@ This might happen because PDF's have metadata updated(?)
 
 - Fingerprint `c2e3e0167f3fe4ef2fb45a718d6be323` for `007f578162ae7f6f64db66a90a18f4beebdc31fd` and `716cc665d4214367217f7045539021d0c15b0f76`
 
+### ResearchGate
+
+ResearchGate adds its own `rgid` field, which we can use to detect PDFs from that source. This typically doesn’t affect the fingerprint (either the first or the second) but does change the hash. For example, fingerprint `d0d8960bbb5a29bf9f06984b7718dd89` has SHA1 hash `e11e417f794452f653689298a6f42800b77b2bb6` and `4ac8b3dc205325fbf4fd2d9058385f9317155bec`.
+
+
+
 ## Harvesting
 
 ### BioNames
@@ -41,7 +47,7 @@ This might happen because PDF's have metadata updated(?)
 ```
 SELECT CONCAT("'http://bionames.org/sha1/",sha1, "',") FROM sha1 WHERE pdf LIKE "http://www.nev.nl/tve/pdf%";
 ```
-### Hard to scarpe websites
+### Hard to scrape websites
 
 Look at https://github.com/lwthiker/curl-impersonate and https://www.zenrows.com/blog/bypass-cloudflare
 

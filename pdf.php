@@ -73,10 +73,22 @@ function get_pdf_info(&$content_info, $pdf_filepath, $debug = false)
 		$content_info->id = array();
 		foreach ($elements as $element)
 		{
-			$content_info->id[] = strtolower($element->getContent());
+			// check for any badness
+			if (preg_match('/^[0-9a-z]+$/i', $element->getContent()))
+			{
+				$content_info->id[] = strtolower($element->getContent());
+			}
 		}
 		
-		$content_info->urn = 'urn:x-pdf:' . $content_info->id[0];
+		if (isset($content_info->id[0]))
+		{
+			$content_info->urn = 'urn:x-pdf:' . $content_info->id[0];
+		}
+		
+		if (count($content_info->id) == 0)
+		{
+			unset($content_info->id);
+		}
 	}
 	
 	// Is PDF encrypted, if yes we will have to delete some fields as they will be gobbledegook
@@ -106,7 +118,7 @@ function get_pdf_info(&$content_info, $pdf_filepath, $debug = false)
 		
 		if (isset($metadata['Author']) && $metadata['Author'] != '')
 		{
-			$content_info->author = trim($metadata['Author']);
+			$content_info->author = $metadata['Author'];
 		}	
 		
 		if (isset($metadata['Subject']) && $metadata['Subject'] != '')
@@ -377,6 +389,11 @@ function get_pdf_info(&$content_info, $pdf_filepath, $debug = false)
 					$content_info->license = $link;
 				}
 
+				if (preg_match('/https:\/\/www.dgfm-ev.de\/cc-by-nd-4.0-deed-de/', $link))
+				{
+					$content_info->license = $link;
+				}
+
 				if (preg_match('/terms-and-conditions/', $link))
 				{
 					$content_info->license = $link;
@@ -563,6 +580,10 @@ if (0)
 	
 	// PDF with links to articles, can we get the text associated with these links?
 	$pdf_filepath = "CJSTOC.PDF";
+	
+	$pdf_filepath = "01_欧文 伊藤昇_01-13.pdf";
+	
+	//$pdf_filepath = "/Users/rpage/Development/content-store-cloud/tmp/PDF.pdf";
 	
 	if (!file_is_pdf($pdf_filepath))
 	{

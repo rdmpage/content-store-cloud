@@ -138,11 +138,16 @@ function store_source_info_db($sha1, $source_info, $debug = false)
 
 	if (isset($source_info->url))
 	{
-		$obj->uri = $source_info->url;
+		$obj->url = $source_info->url;
 	}
 	else
 	{
-		$obj->uri = 'file://' . $source_info->content_filename;
+		$obj->url = 'file://' . $source_info->content_filename;
+	}
+	
+	if (isset($source_info->parent_url))
+	{
+		$obj->parent_url = $source_info->parent_url;
 	}
 	
 	if (isset($source_info->license))
@@ -152,7 +157,7 @@ function store_source_info_db($sha1, $source_info, $debug = false)
 
 	if (isset($source_info->doi))
 	{
-		$obj->doi = $source_info->doi;
+		$obj->doi = strtolower($source_info->doi);
 	}
 	
 	if (isset($source_info->title))
@@ -171,7 +176,10 @@ function store_source_info_db($sha1, $source_info, $debug = false)
 }
 
 //----------------------------------------------------------------------------------------
-function store_pdf($source_info, $debug = true)
+// Store PDF
+// Set $parse_pdf to false if having trouble parsing PDFs, for example if they are
+// not well-formed but still readable
+function store_pdf($source_info, $parse_pdf = true, $debug = true)
 {
 	global $config;
 	global $use_db;
@@ -193,7 +201,10 @@ function store_pdf($source_info, $debug = true)
 	// get information about the PDF
 	$content_info = get_content_info($source_info->content_filename);
 	
-	get_pdf_info($content_info, $source_info->content_filename, false);
+	if ($parse_pdf)
+	{
+		get_pdf_info($content_info, $source_info->content_filename, false);
+	}
 		
 	echo "Storing file using SHA1\n";
 	
@@ -359,7 +370,17 @@ function store_image($source_info, $debug = true)
 // test whether source URL is already in database
 function source_url_in_db($url)
 {
-	$sql = 'SELECT uri FROM source WHERE uri="' . $url . '" LIMIT 1';
+	$sql = 'SELECT url FROM source WHERE url="' . $url . '" LIMIT 1';
+	$data = db_get($sql);
+		
+	return (count($data) == 1);
+}
+
+//----------------------------------------------------------------------------------------
+// test whether parent URL is already in database 
+function source_parent_url_in_db($url)
+{
+	$sql = 'SELECT parent_url FROM source WHERE parent_url="' . $url . '" LIMIT 1';
 	$data = db_get($sql);
 		
 	return (count($data) == 1);

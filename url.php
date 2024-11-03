@@ -150,6 +150,12 @@ function get_source_details($url, $accept = '', $head = true, $debug = false)
 			}
 		
 		}
+		
+		if (preg_match('/https?:\/\/(dx\.)?doi.org\/(?<doi>10\.\d+.*)/', $url, $m))
+		{
+			$source->doi = $m['doi'];
+		}
+		
 	}
 	
 	return $source;

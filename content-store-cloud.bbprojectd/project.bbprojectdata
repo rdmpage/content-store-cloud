@@ -18,6 +18,7 @@
 		<string>35B200E6-BE86-46A8-AC81-D77C87C161D6</string>
 		<string>06F2A77B-3B2D-40B7-9997-B00DD2874C99</string>
 		<string>D215AC4E-EC99-4AE7-A063-27696D80D962</string>
+		<string>F652B976-DFA9-45FD-97E8-A91DB8ADA5B3</string>
 		<string>769E4DDC-3DA9-45A5-8BB9-CD9463CB9244</string>
 		<string>22F07DD7-B62C-4FEE-9FF2-C8630ADD7132</string>
 		<string>53A92BC9-2A5C-42F5-90F9-BD8D26AD4CFD</string>
@@ -836,6 +837,56 @@
 			</dict>
 			<key>ItemName</key>
 			<string>upload_multiple_files.php</string>
+			<key>ItemType</key>
+			<string>FileReference</string>
+			<key>UserOverrideItemName</key>
+			<true/>
+		</dict>
+		<key>F652B976-DFA9-45FD-97E8-A91DB8ADA5B3</key>
+		<dict>
+			<key>ItemData</key>
+			<dict>
+				<key>BookmarkData</key>
+				<data>
+				Ym9vazQDAAAAAAQQMAAAAO1XKZa7T1/CHjvg4nSf90G8
+				imRgf6Z2LFytZLzB1oh1JAIAAAQAAAADAwAAAAgAKAUA
+				AAABAQAAVXNlcnMAAAAFAAAAAQEAAHJwYWdlAAAACwAA
+				AAEBAABEZXZlbG9wbWVudAATAAAAAQEAAGNvbnRlbnQt
+				c3RvcmUtY2xvdWQAFAAAAAEBAAB1cGxvYWRfdW5wYXl3
+				YWxsLnBocBQAAAABBgAAEAAAACAAAAAwAAAARAAAAGAA
+				AAAIAAAABAMAAIRcAAAAAAAACAAAAAQDAACWxgMAAAAA
+				AAgAAAAEAwAAWSklAAAAAAAIAAAABAMAANR0MAwAAAAA
+				CAAAAAQDAABdfx4PAAAAABQAAAABBgAAmAAAAKgAAAC4
+				AAAAyAAAANgAAAAIAAAAAAQAAEHGT2vkIX5KGAAAAAEC
+				AAABAAAAAAAAAA8AAAAAAAAAAAAAAAAAAAAIAAAABAMA
+				AAMAAAAAAAAABAAAAAMDAAD1AQAACAAAAAEJAABmaWxl
+				Oi8vLwwAAAABAQAATWFjaW50b3NoIEhECAAAAAQDAAAA
+				kIKW5wAAAAgAAAAABAAAQcXTWx6AAAAkAAAAAQEAAEVF
+				REJDNDk1LURGNTItNDU2QS1CNDMxLUZCNjA3QkYwNEFE
+				MRgAAAABAgAAgQAAAAEAAADvEwAAAQAAAAAAAAAAAAAA
+				AQAAAAEBAAAvAAAAAAAAAAEFAAAaAAAAAQEAAE5TVVJM
+				RG9jdW1lbnRJZGVudGlmaWVyS2V5AAAEAAAAAwMAAChq
+				BwDYAAAA/v///wEAAAAAAAAAEQAAAAQQAAB8AAAAAAAA
+				AAUQAADoAAAAAAAAABAQAAAUAQAAAAAAAEAQAAAEAQAA
+				AAAAAAIgAADgAQAAAAAAAAUgAABQAQAAAAAAABAgAABg
+				AQAAAAAAABEgAACUAQAAAAAAABIgAAB0AQAAAAAAABMg
+				AACEAQAAAAAAACAgAADAAQAAAAAAADAgAADsAQAAAAAA
+				AAHAAAA0AQAAAAAAABHAAAAgAAAAAAAAABLAAABEAQAA
+				AAAAABDQAAAEAAAAAAAAAPQBAIAYAgAAAAAAAA==
+				</data>
+				<key>FileURL</key>
+				<string>file:///Users/rpage/Development/content-store-cloud/upload_unpaywall.php</string>
+				<key>HasSecurityScope</key>
+				<true/>
+				<key>RelativePath</key>
+				<string>./upload_unpaywall.php</string>
+				<key>TypeID</key>
+				<string>_CFileLocator</string>
+				<key>Version</key>
+				<integer>1</integer>
+			</dict>
+			<key>ItemName</key>
+			<string>upload_unpaywall.php</string>
 			<key>ItemType</key>
 			<string>FileReference</string>
 			<key>UserOverrideItemName</key>
