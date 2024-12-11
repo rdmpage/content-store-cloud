@@ -52,11 +52,14 @@ function clean_license($v)
 
 //----------------------------------------------------------------------------------------
 
+$force = false;
+
 $headings = array();
 
 $row_count = 0;
 
 $filename = "/Users/rpage/Development/bold-gbif-images-o/media.txt";
+$filename = "ibol_2024_07_19/media.txt";
 
 $headings = array('processid', 'title', 'identifier', 'references', 'format', 'license');
 
@@ -122,50 +125,36 @@ while (!feof($file_handle))
 
 		print_r($img);
 		
-		//echo $img->url . "\n";
-		
-		$source_info = new stdclass;
-		$source_info->url = $img->url;
-
-		$source_info->content_filename = get_filename_from_url($source_info->url);											
-		$source_info->content_filename = $config['tmp'] . '/' . $source_info->content_filename;
-
-		$source_info->license = $img->license;
-		$source_info->title = $img->title;
-		
-		$image = get($source_info->url);
-		
-		file_put_contents($source_info->content_filename, $image);
-		
-		store_image($source_info);
-		
-		
+		if (!source_url_in_db($img->url) || $force)
+		{			
+			$source_info = new stdclass;
+			$source_info->url = $img->url;
+	
+			$source_info->content_filename = get_filename_from_url($source_info->url);											
+			$source_info->content_filename = $config['tmp'] . '/' . $source_info->content_filename;
+	
+			$source_info->license = $img->license;
+			$source_info->title = $img->title;
+			
+			$image = get($source_info->url);
+			
+			file_put_contents($source_info->content_filename, $image);
+			
+			store_image($source_info);
+		}	
+		else
+		{
+			echo "Have " . $img->url . " already\n";
+		}	
 	}	
 	$row_count++;	
 	
-	if ($row_count > 1000)
+	if ($row_count > 10000)
 	{
+		echo "[$row_count]\n";
 		break;
 	}
 	
-}	
-
-/*
-
-foreach ($urls as $url)
-{
-	$source_info = new stdclass;
-	$source_info->url = $url;
-		
-	$source_info->content_filename = get_filename_from_url($source_info->url);											
-	$source_info->content_filename = $config['tmp'] . '/' . $source_info->content_filename;
-	
-	$image = get($source_info->url);
-	
-	file_put_contents($source_info->content_filename, $image);
-	
-	store_image($source_info);
 }
-*/
 
 ?>
