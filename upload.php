@@ -225,7 +225,11 @@ function store_pdf($source_info, $parse_pdf = true, $debug = true)
 		if (!file_exists($dir))
 		{
 			$oldumask = umask(0); 
-			mkdir($dir, 0777);
+			if (!mkdir($dir, 0777))
+			{
+				echo "Failed to make directory $dir\n";
+				exit();
+			}
 			umask($oldumask);
 		}
 	}
@@ -250,7 +254,12 @@ function store_pdf($source_info, $parse_pdf = true, $debug = true)
 	
 	if (!file_exists($store_filename))
 	{	
-		copy($json_filepath, $store_filename);
+		if (!copy($json_filepath, $store_filename))
+		{
+			echo "Failed to copy file\n";
+			exit();
+		}
+		
 	}
 	else
 	{
@@ -320,7 +329,11 @@ function store_image($source_info, $debug = true)
 		if (!file_exists($dir))
 		{
 			$oldumask = umask(0); 
-			mkdir($dir, 0777);
+			if (!mkdir($dir, 0777))
+			{
+				echo "Failed to make directory $dir\n";
+				exit();
+			}
 			umask($oldumask);
 		}
 	}
@@ -328,7 +341,11 @@ function store_image($source_info, $debug = true)
 	if (!file_exists($store_filename))
 	{	
 		echo "Copying $source_info->content_filename to $store_filename\n";	
-		copy($source_info->content_filename, $store_filename);
+		if (!copy($source_info->content_filename, $store_filename))
+		{
+			echo "Failed to copy file\n";
+			exit();
+		}
 	}
 	else
 	{
@@ -345,7 +362,12 @@ function store_image($source_info, $debug = true)
 	
 	if (!file_exists($store_filename))
 	{	
-		copy($json_filepath, $store_filename);
+		if (!copy($json_filepath, $store_filename))
+		{
+			echo "Failed to copy file\n";
+			exit();
+		}
+		
 	}
 	else
 	{
@@ -374,6 +396,26 @@ function source_url_in_db($url)
 	$data = db_get($sql);
 		
 	return (count($data) == 1);
+}
+
+//----------------------------------------------------------------------------------------
+// D o we have a SHA1 for a source URL?
+function source_url_to_sha1($url)
+{
+	$sha1 = '';
+	
+	$sql = 'SELECT * FROM source WHERE url="' . $url . '" LIMIT 1';
+	$data = db_get($sql);
+	
+	foreach ($data as $row)
+	{
+		if (isset($row->sha1))
+		{
+			$sha1 = $row->sha1;
+		}
+	}
+		
+	return $sha1;
 }
 
 //----------------------------------------------------------------------------------------
