@@ -5,11 +5,6 @@ require_once (dirname(__FILE__) . '/upload.php');
 $debug = false;
 
 $urls = array(
-'http://www.ammbiol.com/fileadmin/user_upload/01Lobl1_AMMSciBiol108_1-2.pdf',
-'https://hal.science/hal-04605515/file/Faunitaxys_f301.pdf',
-'https://zmmu.msu.ru/rjt/articles/ther10_2_037_046_Kruskop.pdf',
-'http://kmkjournals.com/upload/PDF/RJT/10/ther10_2_037_046_Kruskop.pdf',
-
 );
 
 $force = false;
@@ -21,6 +16,12 @@ $parse_pdf = true; // default, will fail if PDF has problems
 foreach ($urls as $url)
 {
 	echo "\nurl=$url\n";
+	
+	if (preg_match('/^10\.\d+/', $url))
+	{
+		$url = 'https://doi.org/' . $url;
+	}
+	
 
 	$go = true;
 	
@@ -50,7 +51,7 @@ foreach ($urls as $url)
 		
 		$source->content_filename = $config['tmp'] . '/' . $source->content_filename;
 	
-		if (1)
+		if (0)
 		{
 			$source->url = str_replace("'", "%27", $source->url);
 		
@@ -61,7 +62,7 @@ foreach ($urls as $url)
 		}
 		else
 		{
-			$command = "curl_chrome116 -L  -o '$source->content_filename' '$source->url'";
+			$command = "curl_chrome116 -k -L  -o '$source->content_filename' '$source->url'";
 
 			/*
 			$command = "'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'"

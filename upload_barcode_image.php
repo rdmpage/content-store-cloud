@@ -57,8 +57,9 @@ $force = false;
 $headings = array();
 
 $row_count = 0;
+$fetch_count = 0;
+$file_count = 0;
 
-$filename = "/Users/rpage/Development/bold-gbif-images-o/media.txt";
 $filename = "ibol_2024_07_19/media.txt";
 
 $headings = array('processid', 'title', 'identifier', 'references', 'format', 'license');
@@ -71,6 +72,8 @@ while (!feof($file_handle))
 	$line = trim(fgets($file_handle));
 		
 	$row = explode("\t",$line);
+	
+	//echo $line . "\n";
 	
 	$go = is_array($row) && count($row) > 1;
 	
@@ -122,9 +125,7 @@ while (!feof($file_handle))
 					break;
 			}
 		}
-
-		print_r($img);
-		
+				
 		if (!source_url_in_db($img->url) || $force)
 		{			
 			$source_info = new stdclass;
@@ -136,23 +137,76 @@ while (!feof($file_handle))
 			$source_info->license = $img->license;
 			$source_info->title = $img->title;
 			
-			$image = get($source_info->url);
-			
-			file_put_contents($source_info->content_filename, $image);
-			
-			store_image($source_info);
+			if (0)
+			{
+				$image = get($img->url);
+				file_put_contents($source_info->content_filename, $image);
+				store_image($source_info);
+			}
+			else
+			{				
+				// get image from disk
+				$md5 = md5($img->url);
+				
+				$basedir = '/Volumes/LaCie/BOLD/images';
+				
+				$subdir = array(
+					substr($md5, 0, 2), 
+					substr($md5, 2, 2), 
+					substr($md5, 4, 2)
+				);
+				
+				$image_filename = $basedir . "/" . join("/", $subdir) . "/"  . $md5 . '.jpg';
+				
+				if (file_exists($image_filename))
+				{
+					echo "$image_filename found " . $img->url . "\n";
+					$image = file_get_contents($image_filename);
+				
+					file_put_contents($source_info->content_filename, $image);					
+					store_image($source_info);
+					
+					$file_count++;
+					
+					if ($file_count % 1000 == 0)
+					{
+						$rand = rand(1000000, 3000000);
+    					echo "\n-- ...sleeping for " . round(($rand / 1000000),2) . ' seconds' . "\n\n";
+    					usleep($rand);
+					}
+					
+				}
+				else
+				{
+					echo "$image_filename NOT found " . $img->url . "\n";
+					
+					$image = get($img->url);
+					file_put_contents($source_info->content_filename, $image);					
+					store_image($source_info);
+					
+					$fetch_count++;
+					
+					if ($fetch_count % 100 == 0)
+					{
+						$rand = rand(1000000, 3000000);
+    					echo "\n-- ...sleeping for " . round(($rand / 1000000),2) . ' seconds' . "\n\n";
+    					usleep($rand);
+					}
+					
+				}
+			}
 		}	
 		else
 		{
-			echo "Have " . $img->url . " already\n";
+			//echo "Have " . $img->url . " already\n";
+			//echo ".";
 		}	
 	}	
 	$row_count++;	
 	
-	if ($row_count > 10000)
+	if ($row_count % 100 == 0)
 	{
 		echo "[$row_count]\n";
-		break;
 	}
 	
 }

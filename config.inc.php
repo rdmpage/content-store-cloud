@@ -32,6 +32,7 @@ $config['content'] = '/Users/rpage/Library/CloudStorage/CloudMounter-content-sto
 
 // Where we store downloaded files
 $config['tmp'] = dirname(__FILE__) . '/tmp';
+$config['tmp'] = sys_get_temp_dir();
 
 // Where we put files we want to add
 $config['watch'] = dirname(__FILE__) . '/watch';

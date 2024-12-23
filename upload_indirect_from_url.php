@@ -11,7 +11,7 @@ use Sunra\PhpSimple\HtmlDomParser;
 
 $debug = false;
 
-$urls=array();
+$urls=array('https://www.worlddragonfly.org/article/13887890-2010-9748375/');
 
 $force = false;
 //$force = true;
@@ -43,13 +43,12 @@ foreach ($urls as $url)
 	}
 	if ($go)
 	{
+		echo "\nURL=$url\n\n";
+	
 		$html = get($url);
 		
 		//$html = substr($html, 0, 32000);
-		
-		//echo $html;
-		
-		
+				
 		// meta tags, need to convert to linked data for a subset of tags that
 		// will add value
 		$dom = HtmlDomParser::str_get_html($html);
@@ -70,7 +69,15 @@ foreach ($urls as $url)
 			// meta
 			foreach ($dom->find('meta') as $meta)
 			{
-				echo $meta->name . ' ' . $meta->content . "\n";
+				if (isset($meta->name))
+				{
+					echo $meta->name . ' ' . $meta->content . "\n";
+				}
+
+				if (isset($meta->property))
+				{
+					echo $meta->property . ' ' . $meta->content . "\n";
+				}
 				
 				switch ($meta->name)
 				{				
@@ -108,7 +115,15 @@ foreach ($urls as $url)
 					case 'access_control':
 						$source->license = $meta->content;
 						break;
-						
+					
+					case 'eprints.document_url':
+						if (preg_match('/\.pdf$/', $meta->content))
+						{
+							$source->url = $meta->content;
+							$have_pdf = true;
+						}
+						break;
+												
 					default:
 						break;
 				}
@@ -305,6 +320,18 @@ foreach ($urls as $url)
 					}
 				}
 			}
+			
+			// https://www.worlddragonfly.org/article/13887890-2010-9748375/
+			foreach ($dom->find('div[class=sqs-block-content] p a') as $a)
+			{				
+				if (preg_match('/https?:\/\/doi.org\/(.*)/', $a->href, $m))
+				{
+					if (!isset($source->doi))
+					{
+						$source->doi = $m[1];
+					}
+				}
+			}
 
 	
 			// PDF----------------------------------------------------------------------------
@@ -316,6 +343,7 @@ foreach ($urls as $url)
 				{
 					if (preg_match('/epdf/', $a->href))
 					{
+						echo "PDF matched line [" . __LINE__ . "]\n";
 						$source->url = $a->href;
 					}
 				}
@@ -325,6 +353,7 @@ foreach ($urls as $url)
 				{
 					if ($ogurl != '' && preg_match('/trudyzin/', $ogurl))
 					{
+						echo "PDF matched line [" . __LINE__ . "]\n";
 						$source->url = str_replace('../', 'https://www.zin.ru/journals/trudyzin/', $a->href);
 					}				
 				}
@@ -333,6 +362,7 @@ foreach ($urls as $url)
 				{								
 					if ($ogurl != '' && preg_match('/zsr/', $ogurl))
 					{
+						echo "PDF matched line [" . __LINE__ . "]\n";
 						$source->url = preg_replace('/^\.\//', 'https://www.zin.ru/journals/zsr/', $a->href);
 					}				
 				}
@@ -343,10 +373,12 @@ foreach ($urls as $url)
 				{
 					if (preg_match('/\/upload\/PDF\/ArthropodaSelecta\//', $a->href))
 					{
+						echo "PDF matched line [" . __LINE__ . "]\n";
 						$source->url = 'https://kmkjournals.com/' . $a->href;
 					}
 					if (preg_match('/\/upload\/PDF\/RJT\//', $a->href))
 					{
+						echo "PDF matched line [" . __LINE__ . "]\n";
 						$source->url = 'https://kmkjournals.com/' . $a->href;
 					}
 				}
@@ -356,6 +388,7 @@ foreach ($urls as $url)
 				{
 					if (preg_match('/\/upload\/.*\.pdf/', $a->href))
 					{
+						echo "PDF matched line [" . __LINE__ . "]\n";
 						$source->url = 'https://acarina.utmn.ru' . $a->href;
 					}
 				}		
@@ -365,6 +398,7 @@ foreach ($urls as $url)
 				{
 					if (preg_match('/pdf/', $a->href))
 					{
+						echo "PDF matched line [" . __LINE__ . "]\n";
 						$source->url = $a->href;
 					}
 				}		
@@ -374,6 +408,7 @@ foreach ($urls as $url)
 				{
 					if (preg_match('/pdf/', $a->href))
 					{
+						echo "PDF matched line [" . __LINE__ . "]\n";
 						$source->url = $a->href;
 					}
 				}	
@@ -382,6 +417,7 @@ foreach ($urls as $url)
 				{
 					if (preg_match('/www.binran.ru.*\.pdf/', $a->href))
 					{
+						echo "PDF matched line [" . __LINE__ . "]\n";
 						$source->url = $a->href;
 					}
 				}	
@@ -395,6 +431,7 @@ foreach ($urls as $url)
 				// Taiwania
 				foreach ($dom->find('input[name=pdfdownload]') as $input)
 				{
+					echo "PDF matched line [" . __LINE__ . "]\n";
 					$source->url = 'https://taiwania.ntu.edu.tw/pdf/' . $input->file;
 				}	
 				
@@ -403,6 +440,7 @@ foreach ($urls as $url)
 				{
 					if (preg_match('/www.funga.fi.*\.pdf/', $a->href))
 					{
+						echo "PDF matched line [" . __LINE__ . "]\n";
 						$source->url = $a->href;
 						$source->url = str_replace(' ', '%20', $source->url);
 					}
@@ -413,6 +451,7 @@ foreach ($urls as $url)
 				{
 					if (preg_match('/pdf/', $a->href))
 					{
+						echo "PDF matched line [" . __LINE__ . "]\n";
 						$source->url = 'https://www.ncbi.nlm.nih.gov' . $a->href;
 					}
 				}	
@@ -422,6 +461,7 @@ foreach ($urls as $url)
 				{
 					if (preg_match('/pdf/', $a->{'data-popup'}))
 					{
+						echo "PDF matched line [" . __LINE__ . "]\n";
 						$source->url = 'https://www.ingentaconnect.com' . str_replace('&amp;', '&', $a->{'data-popup'});
 					}
 				}	
@@ -430,6 +470,7 @@ foreach ($urls as $url)
 				{
 					if (preg_match('/\.pdf/', $a->href))
 					{
+						echo "PDF matched line [" . __LINE__ . "]\n";
 						$source->url = $a->href;
 					}
 				}	
@@ -442,6 +483,7 @@ foreach ($urls as $url)
 						{
 							if (isset($base->href))
 							{
+								echo "PDF matched line [" . __LINE__ . "]\n";
 								$source->url = $base->href . $a->href;
 								$source->url = str_replace('//', '/', $source->url);
 							}
@@ -454,6 +496,7 @@ foreach ($urls as $url)
 				{
 					if (preg_match('/pdf/', $a->href))
 					{
+						echo "PDF matched line [" . __LINE__ . "]\n";
 						$source->url = $a->href;
 					}
 				}	
@@ -463,6 +506,7 @@ foreach ($urls as $url)
 				{
 					if (preg_match('/\/data\/article.*\.pdf/', $a->href))
 					{
+						echo "PDF matched line [" . __LINE__ . "]\n";
 						$source->url = 'https://www.aemnp.eu' . $a->href;
 					}
 				}	
@@ -472,6 +516,7 @@ foreach ($urls as $url)
 				{
 					if (preg_match('/.*\.pdf/', $a->href))
 					{
+						echo "PDF matched line [" . __LINE__ . "]\n";
 						$source->url = 'https://repository.si.edu' . $a->href;
 					}
 				}	
@@ -480,6 +525,7 @@ foreach ($urls as $url)
 				{
 					if (preg_match('/uploads.*\.pdf/', $a->href))
 					{
+						echo "PDF matched line [" . __LINE__ . "]\n";
 						$source->url = $a->href;
 					}
 				}	
@@ -489,6 +535,7 @@ foreach ($urls as $url)
 				{
 					if (preg_match('/\.pdf/', $a->href))
 					{
+						echo "PDF matched line [" . __LINE__ . "]\n";
 						$source->url = $a->href;
 					}
 				}
@@ -498,13 +545,31 @@ foreach ($urls as $url)
 				{
 					if (preg_match('/\.pdf/', $a->href))
 					{
-						$source->url = $a->href;
+						echo "PDF matched line [" . __LINE__ . "]\n";
+						
+						// Do we have a complete URL
+						if (preg_match('/^http/', $a->href))
+						{
+							$source->url = $a->href;
+						}
+						else
+						{
+							// Nope, so try and fix this
+							if ($ogurl != '')
+							{
+								if (preg_match('/worlddragonfly/', $ogurl))
+								{
+									$source->url = 'https://www.worlddragonfly.org' . $a->href;
+								}
+							}
+						}
 					}
 				}
 				
 				// https://sfi-cybium.fr/fr/review-butis-teleostei-butidae-indo-pacific-islands-description-three-new-species
 				foreach ($dom->find('iframe[class=pdf]') as $iframe)
 				{
+					echo "PDF matched line [" . __LINE__ . "]\n";
 					$source->url = $iframe->plaintext;
 				}
 			
@@ -513,6 +578,7 @@ foreach ($urls as $url)
 				{
 					if (preg_match('/storage\/entities.*\.pdf/', $a->href))
 					{
+						echo "PDF matched line [" . __LINE__ . "]\n";
 						$source->url = 'https://biosoil.ru' . $a->href;
 					}
 				}
@@ -522,15 +588,17 @@ foreach ($urls as $url)
 				{
 					if (preg_match('/\.pdf/', $a->href))
 					{
+						echo "PDF matched line [" . __LINE__ . "]\n";
 						$source->url = $a->href;
 					}
 				}
 				
-				// https://www.degruyter.com/document/doi/10.1515/mammalia-2013-0101/html
+				// https://www.degruyter.com/pub/doi/10.1515/mammalia-2013-0101/html
 				foreach ($dom->find('div[class=alternateForms d-none] a') as $a)
 				{
 					if (preg_match('/pdf\?licenseType=free/', $a->href))
 					{
+						echo "PDF matched line [" . __LINE__ . "]\n";
 						$source->url = 'https://www.degruyter.com' . $a->href;
 						$source->license =  "free";
 					}
@@ -539,11 +607,48 @@ foreach ($urls as $url)
 				// http://publication.nhmus.hu/folent/cikkreszletes.php?idhoz=7152
 				foreach ($dom->find('div p form input[name=filen]') as $input)
 				{
+					echo "PDF matched line [" . __LINE__ . "]\n";
 					$source->url = $input->value;
-				}				
-	
+				}
+
+				// mnhn.fr
+				foreach ($dom->find('a[title=Download full article in PDF format]') as $a)
+				{
+					echo "PDF matched line [" . __LINE__ . "]\n";
+					$source->url = 'https://sciencepress.mnhn.fr' . $a->href;
+					
+					foreach ($dom->find('p a[title=DOI (Digital Object Identifier)]') as $a)
+					{
+						if (preg_match('/https?:\/\/doi.org\/(.*)/', $a->href, $m))
+						{
+							$source->doi = $m[1];
+						}
+					}
+				}
+				
+				/*
+				// http://entsocjournal.yabee.com.tw/Preview.aspx?SendDOI=10.6660/TESFE.2000024
+				foreach ($dom->find('div a') as $a)
+				{
+					if (preg_match('/pdf/i', $a->href))
+					{
+						$source->url = 'http://entsocjournal.yabee.com.tw' . $a->href;
+					}
+				}
+				*/
+			
+				foreach ($dom->find('a[class=basteriabutton]') as $a)
+				{
+					echo "PDF matched line [" . __LINE__ . "]\n";
+					if (preg_match('/pdf/i', $a->href))
+					{
+						$source->url = $a->href;
+					}
+				}
+									
 			}					
-															
+					
+																		
 			//----------------------------------------------------------------------------
 			
 			if ($source->url != $url)
@@ -596,6 +701,7 @@ foreach ($urls as $url)
 		else
 		{
 			echo "Could not parse HTML\n";
+			exit();
 		}
 	}
 }
