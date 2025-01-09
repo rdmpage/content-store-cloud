@@ -137,7 +137,7 @@ while (!feof($file_handle))
 			$source_info->license = $img->license;
 			$source_info->title = $img->title;
 			
-			if (0)
+			if (1)
 			{
 				$image = get($img->url);
 				file_put_contents($source_info->content_filename, $image);
@@ -149,6 +149,7 @@ while (!feof($file_handle))
 				$md5 = md5($img->url);
 				
 				$basedir = '/Volumes/LaCie/BOLD/images';
+				$basedir = '/Volumes/LaCie 1/BOLD/images';
 				
 				$subdir = array(
 					substr($md5, 0, 2), 

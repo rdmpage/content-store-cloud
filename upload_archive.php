@@ -8,6 +8,7 @@ $filename = 'archive.jsonl';
 
 $count = 0;
 $force = false;
+//$force = true;
 
 /*
 'http://bionames.org/sha1/a7bbdc144b32b143d8293df678cc7772756d91f2',
@@ -39,16 +40,18 @@ while (!feof($file_handle))
 		
 		if (source_url_in_db($url) && !$force)
 		{
-			//echo "Have $url already\n";
+			echo "Have $url already\n";
 			$go = false;
 		}
 		
 		
 		//if (!preg_match('/^03/', $obj->id))
+		/*
 		if (!preg_match('/^00/', $obj->id))
 		{
 			$go = false;
-		}		
+		}	
+		*/	
 		
 		
 		// custom
@@ -73,12 +76,16 @@ while (!feof($file_handle))
 		
 		// travaux.ro
 		
-		/*
-		if (!preg_match('/travaux.ro\/i/', $obj->value->urls[0]))
+		// www.scdwzz.com
+		
+		// http://content.ajarchive.org
+		
+		
+		if (!preg_match('/content.ajarchive.org/', $obj->value->urls[0]))
 		{
 			$go = false;
 		}		
-		*/
+		
 		
 		// problematic PDFs
 		if (in_array($obj->id, array(

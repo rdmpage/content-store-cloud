@@ -18,6 +18,14 @@ $urls=array(
 'http://www.boldsystems.org/pics/VAQTB/gvc16165+1295643092.jpg',
 'http://www.boldsystems.org/pics/VAQTB/gvc16201+1296003600.jpg',
 'http://www.boldsystems.org/pics/VAQTB/gvc17509a+1339170896.JPG',
+
+'http://www.boldsystems.org/pics/OGABA/Lope14-Odo0106+1402319608.jpg',
+'http://www.boldsystems.org/pics/MIGAB/0004+1442047574.jpg',
+);
+
+$urls=array(
+'https://mhn-online-collections-assets-prod.s3.eu-west-1.amazonaws.com/emu/data/oumnh/multimedia/6/592/lep2166a.jpg',
+'https://mhn-online-collections-assets-prod.s3.eu-west-1.amazonaws.com/emu/data/oumnh/multimedia/6/594/lep2167a.jpg',
 );
 
 $force = false;

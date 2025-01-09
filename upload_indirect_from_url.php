@@ -490,6 +490,12 @@ $urls=array(
 '10.18984/lepid.58.2_162',
 );
 
+// redo
+$urls = array(
+'10.21248/contrib.entomol.33.1.3-195',
+'10.21248/contrib.entomol.32.1.39-188',
+);
+
 $force = false;
 //$force = true;
 

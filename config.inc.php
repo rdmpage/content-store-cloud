@@ -22,7 +22,6 @@ $config['b2_key'] 		= getenv('B2_APPLICATIONKEY');
 $config['downloadUrl'] 	= 'https://f000.backblazeb2.com';
 $config['bucket']		= 'content-store';
 
-
 // Cache----------------------------------------------------------------------------------
 // Local folder
 $config['content'] = dirname(__FILE__) . '/content';

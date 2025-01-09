@@ -21,6 +21,9 @@ function get($url)
 	  CURLOPT_COOKIEJAR=> sys_get_temp_dir() . '/cookies.txt',
 	  CURLOPT_COOKIEFILE=> sys_get_temp_dir() . '/cookies.txt',
 	  
+	  // HEAD
+	  CURLOPT_NOBODY => TRUE,
+	  
 	);
 
 	
@@ -37,10 +40,44 @@ function get($url)
 
 
 $sql = 'SELECT sha1, created FROM source WHERE created > "2025-01-05 21" ORDER BY created LIMIT 100';
-$sql = 'SELECT sha1, created FROM source WHERE created > "2025-01-06 04:42:28" ORDER BY created';
+$sql = 'SELECT sha1, created FROM source WHERE created > "2025-01-06 21:12:13" ORDER BY created';
+
+$sql = 'SELECT sha1, created FROM source 
+WHERE created BETWEEN "2025-01-03 00:00:00" AND "2025-01-04 23:59:59" 
+ORDER BY created';
+
+
+if (0)
+{
+	// PDFs
+	$sql = 'SELECT sha1, url, parent_url, created
+	FROM source 
+	INNER JOIN content USING(sha1) 
+	WHERE mimetype="application/pdf" 
+	AND created > "2025-01-06 00:00:00"
+	ORDER BY created
+	LIMIT 10'
+	;
+}
+
+if (1)
+{
+	// images
+	$sql = 'SELECT sha1, url, parent_url, created
+	FROM source 
+	INNER JOIN content USING(sha1) 
+	WHERE mimetype="image/jpeg" 
+	AND created BETWEEN "2025-01-02 00:00:00" AND "2025-01-03 23:59:59" 
+	ORDER BY created
+	LIMIT 1000'
+	;
+}
+
+$failed = array();
 
 $data = db_get($sql);
 
+echo "Checking " . count($data) . " rows.\n";
 
 $count = 1;
 
@@ -62,10 +99,24 @@ foreach ($data as $row)
 	{
 		echo " bad\n";
 		
-		$sql = 'DELETE FROM content WHERE sha1="' . $sha1 . '";';
-		db_put($sql);
-		$sql = 'DELETE FROM source WHERE sha1="' . $sha1 . '";';
-		db_put($sql);
+		echo $row->url . "\n";
+		
+		if (0)
+		{
+			$sql = 'DELETE FROM content WHERE sha1="' . $sha1 . '";';
+			db_put($sql);
+			$sql = 'DELETE FROM source WHERE sha1="' . $sha1 . '";';
+			db_put($sql);
+		}
+		
+		if (isset($row->parent_url))
+		{
+			$failed[] = $row->parent_url;
+		}
+		elseif (isset($row->url))
+		{
+			$failed[] = $row->url;
+		}
 	}
 	
 	if (($count++ % 10) == 0)
@@ -77,5 +128,8 @@ foreach ($data as $row)
 
 
 }
+
+echo "Failed:\n";
+echo join("\n", $failed) . "\n";
 
 ?>
