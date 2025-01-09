@@ -90,21 +90,32 @@ function get_filename_from_url($url, $extension = '')
 {
 	$filename = '';
 	
-	$parts = parse_url($url);
+	// special cases, e.g. where URLs would generate same filename
 	
-	//print_r($parts);
+	// http://www.scdwzz.com/rc-pub/front/front-article/download?id=29114991
+	if (preg_match('/\?id=(\d+)/', $url, $m))
+	{
+		$filename = $m[1] . '.pdf';
+	}	
 	
-	if (isset($parts['path']))
-	{	
-		$filename = basename($parts['path']);
+	if ($filename == '')
+	{
+		$parts = parse_url($url);
 		
-		$filename = sanitise_filename($filename);
+		//print_r($parts);
 		
-		if ($extension != '')
-		{			
-			if (!preg_match('/\.' . $extension . '$/i', $filename))
-			{
-				$filename .= '.' . $extension;
+		if (isset($parts['path']))
+		{	
+			$filename = basename($parts['path']);
+			
+			$filename = sanitise_filename($filename);
+			
+			if ($extension != '')
+			{			
+				if (!preg_match('/\.' . $extension . '$/i', $filename))
+				{
+					$filename .= '.' . $extension;
+				}
 			}
 		}
 	}
