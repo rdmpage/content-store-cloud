@@ -17,6 +17,7 @@
 		<string>BFDCF72F-A959-49B4-BF4C-13FFD681ADE7</string>
 		<string>CBBA6C8E-539D-4124-8A44-A3EEF16A8DFD</string>
 		<string>6C5B2DBB-1950-4203-879F-F3D6881D46CE</string>
+		<string>1EA962B7-B323-45FE-9A3D-039924451A2E</string>
 		<string>D085F575-A640-4DA3-924A-4BBFB68649BE</string>
 		<string>2B767953-75FF-43DD-9C5D-D10DFFF31E96</string>
 		<string>ADBD5B1F-0C4A-4B96-A47B-E26D6FEF9B6C</string>
@@ -77,6 +78,56 @@
 			</dict>
 			<key>ItemName</key>
 			<string>upload_indirect_from_url.php</string>
+			<key>ItemType</key>
+			<string>FileReference</string>
+			<key>UserOverrideItemName</key>
+			<true/>
+		</dict>
+		<key>1EA962B7-B323-45FE-9A3D-039924451A2E</key>
+		<dict>
+			<key>ItemData</key>
+			<dict>
+				<key>BookmarkData</key>
+				<data>
+				Ym9vazQDAAAAAAQQMAAAABis+YflrL9csdhW04v6wXJ8
+				/HN8P4g3LzLP6JUKHbrpJAIAAAQAAAADAwAAAAgAKAUA
+				AAABAQAAVXNlcnMAAAAFAAAAAQEAAHJwYWdlAAAACwAA
+				AAEBAABEZXZlbG9wbWVudAATAAAAAQEAAGNvbnRlbnQt
+				c3RvcmUtY2xvdWQAEwAAAAEBAAB1cGxvYWRfYmlvbmFt
+				ZXMucGhwABQAAAABBgAAEAAAACAAAAAwAAAARAAAAGAA
+				AAAIAAAABAMAAH1CAAAAAAAACAAAAAQDAAApfgAAAAAA
+				AAgAAAAEAwAA6J0MAAAAAAAIAAAABAMAAGnvLAAAAAAA
+				CAAAAAQDAABazpwBAAAAABQAAAABBgAAmAAAAKgAAAC4
+				AAAAyAAAANgAAAAIAAAAAAQAAEHHbyMyN3NFGAAAAAEC
+				AAABAAAAAAAAAA8AAAAAAAAAAAAAAAAAAAAIAAAABAMA
+				AAMAAAAAAAAABAAAAAMDAAD1AQAACAAAAAEJAABmaWxl
+				Oi8vLwwAAAABAQAATWFjaW50b3NoIEhECAAAAAQDAAAA
+				kIKW5wAAAAgAAAAABAAAQcZfRAKAAAAkAAAAAQEAADNG
+				QjlERDg1LTQ5OEItNEMyRC04OEYwLUMwNjM3MjgwQjhC
+				RRgAAAABAgAAgQAAAAEAAADvEwAAAQAAAAAAAAAAAAAA
+				AQAAAAEBAAAvAAAAAAAAAAEFAAAaAAAAAQEAAE5TVVJM
+				RG9jdW1lbnRJZGVudGlmaWVyS2V5AAAEAAAAAwMAAMyQ
+				AADYAAAA/v///wEAAAAAAAAAEQAAAAQQAAB8AAAAAAAA
+				AAUQAADoAAAAAAAAABAQAAAUAQAAAAAAAEAQAAAEAQAA
+				AAAAAAIgAADgAQAAAAAAAAUgAABQAQAAAAAAABAgAABg
+				AQAAAAAAABEgAACUAQAAAAAAABIgAAB0AQAAAAAAABMg
+				AACEAQAAAAAAACAgAADAAQAAAAAAADAgAADsAQAAAAAA
+				AAHAAAA0AQAAAAAAABHAAAAgAAAAAAAAABLAAABEAQAA
+				AAAAABDQAAAEAAAAAAAAAPQBAIAYAgAAAAAAAA==
+				</data>
+				<key>FileURL</key>
+				<string>file:///Users/rpage/Development/content-store-cloud/upload_bionames.php</string>
+				<key>HasSecurityScope</key>
+				<true/>
+				<key>RelativePath</key>
+				<string>./upload_bionames.php</string>
+				<key>TypeID</key>
+				<string>_CFileLocator</string>
+				<key>Version</key>
+				<integer>1</integer>
+			</dict>
+			<key>ItemName</key>
+			<string>upload_bionames.php</string>
 			<key>ItemType</key>
 			<string>FileReference</string>
 			<key>UserOverrideItemName</key>

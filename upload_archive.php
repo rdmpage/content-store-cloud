@@ -45,6 +45,13 @@ while (!feof($file_handle))
 		}
 		
 		
+		if ($count < 0)
+		{
+			$count++;
+			$go = false;
+		}
+		
+		
 		//if (!preg_match('/^03/', $obj->id))
 		/*
 		if (!preg_match('/^00/', $obj->id))
@@ -80,11 +87,20 @@ while (!feof($file_handle))
 		
 		// http://content.ajarchive.org
 		
-		
+		/*
 		if (!preg_match('/content.ajarchive.org/', $obj->value->urls[0]))
 		{
 			$go = false;
-		}		
+		}	
+		*/	
+		
+		
+		if (preg_match('/(www.bhl-europe.eu|ci.nii.ac.jp)/', $obj->value->urls[0]))
+		{
+			$go = false;
+		}	
+		
+		
 		
 		
 		// problematic PDFs
@@ -119,16 +135,32 @@ while (!feof($file_handle))
 		
 		if ($go)
 		{
-			echo "Adding $url\n";
-			echo $obj->value->urls[0] . "\n";
-			$source = get_source_details($url, '', true, $debug);	
+			if (0)
+			{
+				// Add by downloading from BioNames		
 			
-			$source->parent_url = $obj->value->urls[0];
+				echo "Adding $url\n";
+				echo $obj->value->urls[0] . "\n";
+				$source = get_source_details($url, '', true, $debug);	
+				
+				$source->parent_url = $obj->value->urls[0];
+			
+				$source->content_filename = $obj->id . '.pdf';
+				$source->content_filename = $config['tmp'] . '/' . $source->content_filename;
+			
+			}
+			else
+			{
+				echo "Adding $url directly from source\n";
+				echo $obj->value->urls[0] . "\n";
 		
-			$source->content_filename = $obj->id . '.pdf';
-			$source->content_filename = $config['tmp'] . '/' . $source->content_filename;
-		
+				$source = get_source_details($obj->value->urls[0], '', true, $debug);	
+				$source->content_filename = $obj->id . '.pdf';
+				$source->content_filename = $config['tmp'] . '/' . $source->content_filename;
+			}
+							
 			$command = "curl -L --user-agent \"Mozilla/5.0 (Linux; Android 10; SM-G996U Build/QP1A.190711.020; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Mobile Safari/537.36\" -o '$source->content_filename' '$source->url'";
+
 			
 			echo $command . "\n";
 			system($command);

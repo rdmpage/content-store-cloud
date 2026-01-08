@@ -27,7 +27,10 @@ $config['bucket']		= 'content-store';
 $config['content'] = dirname(__FILE__) . '/content';
 
 // B2 drive mounted locally
+// CloudMounter-
 $config['content'] = '/Users/rpage/Library/CloudStorage/CloudMounter-content-store';
+// Mountain Duck
+$config['content'] = '/Users/rpage/Library/Application Support/Mountain Duck/Volumes.noindex/Backblaze B2.localized/content-store';
 
 // Where we store downloaded files
 $config['tmp'] = dirname(__FILE__) . '/tmp';

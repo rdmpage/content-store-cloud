@@ -181,9 +181,7 @@ $debug = false;
 // Original site URL
 $urls=array();
 
-$urls=array(
-'http://www.cassidae.uni.wroc.pl/Podanotum%20melanissimum.pdf',
-);
+$urls=array('http://publicacions.iec.cat/repository/pdf/00000003/00000030.pdf');
 
 
 $force = false;
@@ -197,6 +195,13 @@ foreach ($urls as $url)
 	echo "\nurl=$url\n";
 	
 	$go = true;
+	
+	if (source_url_in_db($url) && !$force)
+	{
+		echo "Have $url already\n";
+		continue;
+	}
+	
 	
 	// 1. We may want to look for a redirect rather than the original URL
 	

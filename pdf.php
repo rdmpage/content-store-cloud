@@ -24,12 +24,27 @@ function file_is_pdf($filename)
 	$file_end = fread($handle, 1024);
 	
 	fclose($handle);
+	
+	//echo $file_start . "\n";
 
 	if (!preg_match('/^\s*%PDF/', $file_start))
 	{
-		echo "$filename is not a PDF\n";
-		$is_pdf = false;
+		if (preg_match('/^\s*Content-Disposition/', $file_start))
+		{
+			echo "$filename has Content-Disposition\n";
+			$is_pdf = true;
+		}
+		else
+		{	
+			echo "$filename is not a PDF\n";
+			$is_pdf = false;
+		}
 	}	
+	else
+	{
+		// Russian weirdness
+
+	}
 
 	// lack of xref causes PDF parser to through exception and bail
 	if (!preg_match('/xref/', $file_start) && !preg_match('/xref/', $file_end))

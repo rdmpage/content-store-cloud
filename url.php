@@ -166,6 +166,11 @@ function get_source_details($url, $accept = '', $head = true, $debug = false)
 		{
 			$source->doi = $m['doi'];
 		}
+
+		if (preg_match('/Resolve_DOI=(?<doi>10\.\d+.*)$/', $url, $m))
+		{
+			$source->doi = $m['doi'];
+		}
 		
 	}
 	

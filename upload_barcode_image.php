@@ -59,6 +59,7 @@ $headings = array();
 $row_count = 0;
 $fetch_count = 0;
 $file_count = 0;
+$store_count = 0;
 
 $filename = "ibol_2024_07_19/media.txt";
 
@@ -137,11 +138,21 @@ while (!feof($file_handle))
 			$source_info->license = $img->license;
 			$source_info->title = $img->title;
 			
-			if (1)
+			if (0)
 			{
 				$image = get($img->url);
 				file_put_contents($source_info->content_filename, $image);
 				store_image($source_info);
+				
+				$fetch_count++;
+				
+				if ($fetch_count % 100 == 0)
+				{
+					$rand = rand(1000000, 3000000);
+					echo "\n-- ...sleeping for " . round(($rand / 1000000),2) . ' seconds' . "\n\n";
+					usleep($rand);
+				}
+					
 			}
 			else
 			{				
@@ -149,7 +160,6 @@ while (!feof($file_handle))
 				$md5 = md5($img->url);
 				
 				$basedir = '/Volumes/LaCie/BOLD/images';
-				$basedir = '/Volumes/LaCie 1/BOLD/images';
 				
 				$subdir = array(
 					substr($md5, 0, 2), 
@@ -169,7 +179,9 @@ while (!feof($file_handle))
 					
 					$file_count++;
 					
-					if ($file_count % 1000 == 0)
+					$store_count++;
+					
+					if ($file_count % 100 == 0)
 					{
 						$rand = rand(1000000, 3000000);
     					echo "\n-- ...sleeping for " . round(($rand / 1000000),2) . ' seconds' . "\n\n";
@@ -186,6 +198,8 @@ while (!feof($file_handle))
 					store_image($source_info);
 					
 					$fetch_count++;
+					
+					$store_count++;
 					
 					if ($fetch_count % 100 == 0)
 					{
@@ -208,6 +222,12 @@ while (!feof($file_handle))
 	if ($row_count % 100 == 0)
 	{
 		echo "[$row_count]\n";
+	}
+	
+	if ($store_count >= 20000)
+	{
+		echo "Done $store_count\n";
+		exit();
 	}
 	
 }
