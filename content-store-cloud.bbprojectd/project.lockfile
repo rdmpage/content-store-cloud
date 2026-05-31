@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>BuildNumber</key>
-	<string>420000064</string>
+	<string>430000124</string>
 	<key>BundleIdentifier</key>
 	<string>com.barebones.bbedit</string>
 	<key>HostIdentifier</key>
@@ -11,15 +11,15 @@
 	<key>HostName</key>
 	<string>Mac mini M1</string>
 	<key>LockDate</key>
-	<date>2025-12-27T09:54:09Z</date>
+	<date>2026-05-30T08:12:20Z</date>
 	<key>LockID</key>
-	<string>64FF8827-76BF-4A14-A457-5737A111E2A5</string>
+	<string>C90286CF-5B62-4C6A-ADA1-B236F6C791EF</string>
 	<key>MarketingVersion</key>
-	<string>15.1.4</string>
+	<string>15.5.5</string>
 	<key>NetworkVolume</key>
 	<false/>
 	<key>ProcessIdentifier</key>
-	<integer>95343</integer>
+	<integer>464</integer>
 	<key>UserName</key>
 	<string>rpage</string>
 	<key>Version</key>

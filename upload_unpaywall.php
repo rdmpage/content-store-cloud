@@ -18,17 +18,21 @@ $dois = array(
 //'10.1016/j.ympev.2004.03.008',
 //'10.1073/pnas.97.12.6585',
 //'10.1093/icb/41.3.538',
-'10.1093/jme/tjaa264',
+//'10.1093/jme/tjaa264',
+
+'10.11646/zootaxa.4941.4.1',
 
 );
 
 foreach ($dois as $doi)
 {
-	echo "\$doi=$$doi\n";
+	echo "\$doi=$doi\n";
 
 	$go = true;
 	
-	$url = 'https://api.oadoi.org/v2/' . urlencode('"' . strtolower($doi) . '"') . '?email=unpaywall@impactstory.org';
+	$url = 'https://api.unpaywall.org/v2/' . strtolower($doi) . '?email=unpaywall@impactstory.org';
+	
+	echo $url . "\n";
 	
 	if (source_parent_url_in_db($url) && !$force)
 	{

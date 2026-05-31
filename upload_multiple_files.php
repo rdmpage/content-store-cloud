@@ -31,6 +31,9 @@ $files=array('Phl botomes de Bolivie  Description de Quatre Nouvelles Esp ces de
 $files=array('A review of the Namaqua gecko  Pachydactylus namaquensis  Reptilia  Gekkonidae  from southern Africa  with the description of two new species.pdf');
 */
 
+$parse_pdf = true;
+//$parse_pdf = false;
+
 foreach ($files as $filename)
 {
 	if (preg_match('/^[^.].*\.pdf$/', $filename))
@@ -65,7 +68,7 @@ foreach ($files as $filename)
 			$source_info->license = $base_license;
 		}
 		
-		store_pdf($source_info);		
+		store_pdf($source_info, $parse_pdf);		
 	}
 
 }

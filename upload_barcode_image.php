@@ -56,9 +56,9 @@ $force = false;
 
 $headings = array();
 
-$row_count = 0;
+$row_count   = 0;
 $fetch_count = 0;
-$file_count = 0;
+$file_count  = 0;
 $store_count = 0;
 
 $filename = "ibol_2024_07_19/media.txt";
@@ -146,13 +146,12 @@ while (!feof($file_handle))
 				
 				$fetch_count++;
 				
-				if ($fetch_count % 100 == 0)
+				if ($fetch_count % 20 == 0)
 				{
 					$rand = rand(1000000, 3000000);
 					echo "\n-- ...sleeping for " . round(($rand / 1000000),2) . ' seconds' . "\n\n";
 					usleep($rand);
-				}
-					
+				}					
 			}
 			else
 			{				
@@ -181,9 +180,10 @@ while (!feof($file_handle))
 					
 					$store_count++;
 					
+					// give sync time to catch up
 					if ($file_count % 100 == 0)
 					{
-						$rand = rand(1000000, 3000000);
+						$rand = rand(10000000, 30000000);
     					echo "\n-- ...sleeping for " . round(($rand / 1000000),2) . ' seconds' . "\n\n";
     					usleep($rand);
 					}
@@ -201,6 +201,7 @@ while (!feof($file_handle))
 					
 					$store_count++;
 					
+					// give website a break
 					if ($fetch_count % 100 == 0)
 					{
 						$rand = rand(1000000, 3000000);

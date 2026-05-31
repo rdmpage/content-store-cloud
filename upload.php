@@ -176,6 +176,32 @@ function store_source_info_db($sha1, $source_info, $debug = false)
 }
 
 //----------------------------------------------------------------------------------------
+function create_thumbnail($pdf_filename)
+{
+	global $config;
+	
+	$dpi 			= 72;
+	$first_page     = 1; // might change for PDfs with cover pages
+	$size           = 150;
+	
+	$id = uniqid();
+	$thumbnail_filename      = $config['tmp'] . '/' . $id  . '.jpg';
+	$thumbnail_filename_webp = $config['tmp'] . '/' . $id  . '.webp';
+	
+	$command = "pdftoppm -jpeg -scale-to $size -f $first_page -l $first_page -singlefile '$pdf_filename' " .  $config['tmp'] . "/" . $id;
+	echo $command . "\n";
+	system($command);
+	
+	$command = "cwebp -quiet $thumbnail_filename -o $thumbnail_filename_webp";
+	echo $command . "\n";
+
+	system($command);
+	
+	return $thumbnail_filename;
+}
+
+
+//----------------------------------------------------------------------------------------
 // Store PDF
 // Set $parse_pdf to false if having trouble parsing PDFs, for example if they are
 // not well-formed but still readable
@@ -243,6 +269,16 @@ function store_pdf($source_info, $parse_pdf = true, $debug = true)
 	{
 		echo "Have $source_info->content_filename already\n";
 	}
+	
+	// Thumbnail
+	$thumbnail_filename = create_thumbnail($source_info->content_filename);
+	$content_filepath = create_path_from_hash($content_info->sha1, $config['content']);
+	$store_filename = $content_filepath . '-thumbnail.webp';
+	
+	echo "Copying $thumbnail_filename to $store_filename\n";	
+	copy($thumbnail_filename, $store_filename);
+	
+	
 
 	// upload metadata for PDF	
 	
@@ -392,8 +428,13 @@ function store_image($source_info, $debug = true)
 // test whether source URL is already in database
 function source_url_in_db($url)
 {
-	$sql = 'SELECT url FROM source WHERE url="' . $url . '" LIMIT 1';
+	$sql = 'SELECT sha1, url FROM source WHERE url="' . $url . '" LIMIT 1';
 	$data = db_get($sql);
+	
+	if (count($data) == 1)
+	{
+		echo $data[0]->sha1 . "\n";
+	}
 		
 	return (count($data) == 1);
 }
@@ -422,8 +463,14 @@ function source_url_to_sha1($url)
 // test whether parent URL is already in database 
 function source_parent_url_in_db($url)
 {
-	$sql = 'SELECT parent_url FROM source WHERE parent_url="' . $url . '" LIMIT 1';
+	$sql = 'SELECT sha1, parent_url FROM source WHERE parent_url="' . $url . '" LIMIT 1';
 	$data = db_get($sql);
+	
+	if (count($data) == 1)
+	{
+		echo $data[0]->sha1 . "\n";
+	}
+	
 		
 	return (count($data) == 1);
 }
